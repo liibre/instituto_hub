@@ -1,0 +1,124 @@
+---
+title: "como começar a usar R"
+author: "Andrea Sánchez-Tapia & Sara Mortara"
+date: "14.nov"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: xaringan-themer.css
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: true
+      ratio: '16:9'
+---
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+```
+
+```{r xaringanthemer, include = FALSE}
+library(xaringanthemer)
+xaringanthemer::style_mono_accent(
+  base_color = "#A70000",
+  #  primary_color = "#A70000",
+  #secondary_color = "#ff0000",
+  white_color = "white",
+  colors = c(
+    red = "#A70000",
+    purple = "#88398a",
+    orange = "#ff8811",
+    green = "#136f63",
+    blue = "#4B4FFF",
+    white = "#FFFFFF",
+    black = "#181818"
+  ),
+  header_font_google = google_font("Roboto Condensed"),
+  text_font_google   = google_font("Roboto Condensed", "300", "300i"),
+  code_font_google   = google_font("Ubuntu Mono"),
+  text_font_size = "30px",
+  code_font_size = "30px",
+  )
+```
+
+## apresentação
+
+```{r logo-liibre, out.width=150, echo = FALSE}
+knitr::include_graphics("https://github.com/liibre/logo/blob/master/figures/logo_liibre.png")
+```
+
+
++ __Andrea Sánchez-Tapia__ Bióloga (UNAL - Colômbia), MSc. Ecologia (UFRJ), Dra. em Botânica (ENBT-JBRJ). Usuária de R desde 2009. Ecologia quantitativa, Informática da biodiversidade, ENM/SDM, Ciência de dados feminista
+--
+
++ __Sara Ribeiro Mortara__
+Bióloga (ESALQ/USP), MSc. Ecologia e Conservação da Biodiversidade (UESC) e Dra. em Ecologia (USP). Usuária de R desde 2009. Modelagem estatística, Ecologia & Ciência de dados feminista
+--
+
+---
+
+
+## projetos
+
+- pacote [**.red[coronabr]**](https://liibre.github.io/coronabr/about.html)
+
+- pacote [__.red[modler]__](https://model-r.github.io/modleR/]modleR)
+
+- [**Observatório COVID-19 BR**](https://covid19br.github.io/)
+
+- [**.purple[@RLadiesRio]**](https://twitter.com/RLadiesRio)
+
+<center>
+```{r logo-rladiesplus, out.width=150, echo = FALSE}
+knitr::include_graphics("https://github.com/rladies/starter-kit/blob/master/stickers/rainbow-inclusive.png")
+```
+
+---
+
+## sobre hoje
+
+1. conhecendo a linguagem R
+
+2. fluxo de trabalho
+
+3. manipulação de dados
+
+4. criando figuras básicas
+
+---
+
+## por que R?
+
+- script é essencial para reprodutibilidade, mas não a garante 
+--
+
+
+- __código aberto__, __livre__ & __sem custo__
+--
+
+
+- acessível (em comparação a outras linguagens de programação)
+--
+
+
+- muito comum na Biologia, Ciência de Dados e em diversas áreas
+
+---
+
+## Outras fontes de ajuda
+
++ Taskviews 
+
+[https://cran.r-project.org/web/views/](https://cran.r-project.org/web/views/)
+
+
+---
+
+# Obrigada!
+
+<center>
+`r icon::fa("paper-plane")` [andreasancheztapia@gmail.com](mailto:andreasancheztapia@gmail.com) [saramortara@gmail.com](mailto:saramortara@gmail.com) 
+
+`r icon::fa("twitter")` [@SanchezTapiaA](https://twitter.com/SanchezTapiaA)  [@MortaraSara](https://twitter.com/MortaraSara) 
+
+`r icon::fa("github")` `r icon::fa("gitlab")` [¡liibre!](http://github.com/liibre)  
