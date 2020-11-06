@@ -9,7 +9,7 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
-      countIncrementalSlides: true
+      countIncrementalSlides: false
       ratio: '16:9'
 ---
 
@@ -19,6 +19,7 @@ options(htmltools.dir.version = FALSE)
 
 ```{r xaringanthemer, include = FALSE}
 library(xaringanthemer)
+library(xaringanExtra)
 xaringanthemer::style_mono_accent(
   base_color = "#A70000",
   #  primary_color = "#A70000",
@@ -44,16 +45,17 @@ xaringanthemer::style_mono_accent(
 ## apresentação
 
 ```{r logo-liibre, echo = FALSE}
-library(xaringanExtra)
+
 xaringanExtra::use_logo(image_url = "https://raw.githubusercontent.com/liibre/logo/master/figures/logo_liibre.png", width = 150)
 #knitr::include_graphics("https://raw.githubusercontent.com/liibre/logo/master/figures/logo_liibre.png?token=AA75IFQA34SCCZB72UL5IXK7UWDYA")
 ```
 
 
-+ __Andrea Sánchez-Tapia__ Bióloga (UNAL - Colômbia), MSc. Ecologia (UFRJ), Dra. em Botânica (ENBT-JBRJ). Usuária de R desde 2009. Ecologia quantitativa, Informática da biodiversidade, ENM/SDM, Ciência de dados feminista
+- __Andrea Sánchez-Tapia__ Bióloga (UNAL - Colômbia), MSc. Ecologia (UFRJ), Dra. em Botânica (ENBT-JBRJ). Usuária de R desde 2009. Ecologia quantitativa, Informática da biodiversidade, ENM/SDM, Ciência de dados feminista
 --
 
-+ __Sara Ribeiro Mortara__
+
+- __Sara Ribeiro Mortara__
 Bióloga (ESALQ/USP), MSc. Ecologia e Conservação da Biodiversidade (UESC) e Dra. em Ecologia (USP). Usuária de R desde 2009. Modelagem estatística, Ecologia & Ciência de dados feminista
 --
 
@@ -79,13 +81,24 @@ knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/m
 
 ## sobre hoje
 
-1. conhecendo a linguagem R
+1. conhecendo a linguagem R e fluxo de trabalho
 
-2. fluxo de trabalho
+2. introdução ao R
 
 3. manipulação de dados
 
 4. criando figuras básicas
+
+---
+
+## códigos de apoio
+
+todos os códigos diponíveis em: 
+
+`r icon::fa("github")` https://github.com/liibre/instituto_hub_demo
+
+
+`r icon::fa("r-project")`  https://rstudio.cloud/project/1878325
 
 ---
 
