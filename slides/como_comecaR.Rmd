@@ -1,6 +1,6 @@
 ---
 title: "como começar a usar R"
-author: "Andrea Sánchez-Tapia & Sara Mortara"
+author: "Sara Mortara & Andrea Sánchez-Tapia"
 date: "14.nov"
 output:
   xaringan::moon_reader:
@@ -43,8 +43,10 @@ xaringanthemer::style_mono_accent(
 
 ## apresentação
 
-```{r logo-liibre, out.width=150, echo = FALSE}
-knitr::include_graphics("https://github.com/liibre/logo/blob/master/figures/logo_liibre.png")
+```{r logo-liibre, echo = FALSE}
+library(xaringanExtra)
+xaringanExtra::use_logo(image_url = "https://raw.githubusercontent.com/liibre/logo/master/figures/logo_liibre.png", width = 150)
+#knitr::include_graphics("https://raw.githubusercontent.com/liibre/logo/master/figures/logo_liibre.png?token=AA75IFQA34SCCZB72UL5IXK7UWDYA")
 ```
 
 
@@ -62,7 +64,7 @@ Bióloga (ESALQ/USP), MSc. Ecologia e Conservação da Biodiversidade (UESC) e D
 
 - pacote [**.red[coronabr]**](https://liibre.github.io/coronabr/about.html)
 
-- pacote [__.red[modler]__](https://model-r.github.io/modleR/]modleR)
+- pacote [__.red[modleR]__](https://model-r.github.io/modleR/]modleR)
 
 - [**Observatório COVID-19 BR**](https://covid19br.github.io/)
 
@@ -70,7 +72,7 @@ Bióloga (ESALQ/USP), MSc. Ecologia e Conservação da Biodiversidade (UESC) e D
 
 <center>
 ```{r logo-rladiesplus, out.width=150, echo = FALSE}
-knitr::include_graphics("https://github.com/rladies/starter-kit/blob/master/stickers/rainbow-inclusive.png")
+knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/master/stickers/rainbow-inclusive.png")
 ```
 
 ---
