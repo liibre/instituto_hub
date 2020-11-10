@@ -31,12 +31,15 @@ A página [https://github.com/liibre/instituto_hub_demo](https://github.com/liib
 
 Deszipe o arquivo .zip e entre no folder. Abra o projeto fazendo click em __instituto_hub_demo.Rproj__
 
-Se o RStudio abrir e você consegue ver o projeto aberto na esquina superior direita da janela de RStudio, está pronta para participar :) 
+Se o RStudio abrir e você conseguir ver o projeto aberto na esquina superior direita da janela de RStudio, está pronta para participar :) 
 
 ```{r, rstudio}
 library(knitr)
 include_graphics("figs/rstudio.png")
 ```
 
+## RStudio Cloud
 
+Se você tiver problemas para instalar R ou RStudio no seu computador, acesse o seguinte [link](https://rstudio.cloud/project/1878325) e siga as instruções para criar uma conta em [RStudio Cloud](https://rstudio.cloud/). 
 
+Nota: este serviço tem capacidade limitada de processamento. Procure utilizar esta opção apenas se não conseguir realizar a instalação local. 

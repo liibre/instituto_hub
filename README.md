@@ -10,6 +10,7 @@ ecologia
         RStudio](#download-e-instalação-de-rstudio)
   - [*Download* do material da
     oficina](#download-do-material-da-oficina)
+      - [RStudio Cloud](#rstudio-cloud)
 
 # Instruções de instalação
 
@@ -41,7 +42,17 @@ download do arquivo ZIP com este projeto clicando neste link
 Deszipe o arquivo .zip e entre no folder. Abra o projeto fazendo click
 em **instituto\_hub\_demo.Rproj**
 
-Se o RStudio abrir e você consegue ver o projeto aberto na esquina
+Se o RStudio abrir e você conseguir ver o projeto aberto na esquina
 superior direita da janela de RStudio, está pronta para participar :)
 
 <img src="figs/rstudio.png" width="1280" />
+
+## RStudio Cloud
+
+Se você tiver problemas para instalar R ou RStudio no seu computador,
+acesse o seguinte [link](https://rstudio.cloud/project/1878325) e siga
+as instruções para criar uma conta em [RStudio
+Cloud](https://rstudio.cloud/).
+
+Nota: este serviço tem capacidade limitada de processamento. Procure
+utilizar esta opção apenas se não conseguir realizar a instalação local.
