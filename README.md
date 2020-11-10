@@ -1,10 +1,47 @@
-# Material para oficina __Como começar a usar o R__
+Como começar a usar R
+================
+Sara Mortara & Andrea Sánchez-Tapia <br> ¡liibre\! - laboratório
+independente de informática da biodiversidade e reprodutibilidade em
+ecologia
 
-## Objetivo
+  - [Instruções de instalação](#instruções-de-instalação)
+      - [Download e instalação de R](#download-e-instalação-de-r)
+      - [Download e instalação de
+        RStudio](#download-e-instalação-de-rstudio)
+  - [*Download* do material da
+    oficina](#download-do-material-da-oficina)
 
-Nesta oficina apresentaremos as bases para começar um plano de estudos usando o ambiente estatístico R. Vamos abordar os temas seguintes: filosofia, história e fundamentos de R, boas práticas de trabalho em R, organização de projetos de análise de dados,  leitura e manipulação de dados. Também mostraremos aonde encontrar materiais e informação para continuar aprendendo R por conta própria.
+# Instruções de instalação
 
-## Sobre nós
+Antes da oficina, recomendamos que você instale R e RStudio.
 
-Andrea Sánchez-Tapia e Sara Mortara são fundadoras de __¡liibre!__, o Laboratório Independente de Informática da Biodiversidade e Reprodutibilidade em Ecologia. __¡liibre!__ se propõe a criar um ambiente de ensino e aprendizagem de habilidades computacionais a partir de uma perspectiva de ciência de dados feminista, responsável, aberta e para todes. Ambas são biólogas e usuárias de R. Elas ministram a disciplina “Projetos de Análise de Dados usando R” no programa de pós-graduação da Escola Nacional de Botânica Tropical - Instituto de Pesquisas Jardim Botânico do Rio de Janeiro. São co-organizadoras do R-Ladies Rio de Janeiro e autoras de vários pacotes de R. 
+## Download e instalação de R
 
+  - Se você está em um computador com Windows:
+    <https://cran.r-project.org/bin/windows/base/release.htm>
+  - Em um Mac faça download deste arquivo:
+    <https://cran.r-project.org/bin/macosx/R-latest.pkg>
+  - Em Linux faça download dos arquivos binários:
+    <https://cran.r-project.org/index.html> ou execute `sudo apt-get
+    install r-base` em um sistema Debian/Ubuntu.
+
+## Download e instalação de RStudio
+
+Faça download e instale RStudio desde
+<https://www.rstudio.com/products/rstudio/download/#download>. Buque a
+versão mais adequada para seu sistema operativo (Windows, Mac ou Linux).
+
+# *Download* do material da oficina
+
+A página <https://github.com/liibre/instituto_hub_demo> tem um
+repositório de exemplo para que você trabalhe durante a oficina. Faça
+download do arquivo ZIP com este projeto clicando neste link
+<https://github.com/liibre/instituto_hub_demo/archive/main.zip>.
+
+Deszipe o arquivo .zip e entre no folder. Abra o projeto fazendo click
+em **instituto\_hub\_demo.Rproj**
+
+Se o RStudio abrir e você consegue ver o projeto aberto na esquina
+superior direita da janela de RStudio, está pronta para participar :)
+
+<img src="figs/rstudio.png" width="1280" />
