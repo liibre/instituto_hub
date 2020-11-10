@@ -1,7 +1,7 @@
 ---
 title: "como começar a usar R"
-author: "Sara Mortara & Andrea Sánchez-Tapia"
-date: "14.nov"
+author: "Sara Mortara & Andrea Sánchez-Tapia <br> ¡liibre!"
+date: "14.nov.2020"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -51,29 +51,30 @@ xaringanExtra::use_logo(image_url = "https://raw.githubusercontent.com/liibre/lo
 ```
 
 
-- __Andrea Sánchez-Tapia__ Bióloga (UNAL - Colômbia), MSc. Ecologia (UFRJ), Dra. em Botânica (ENBT-JBRJ). Usuária de R desde 2009. Ecologia quantitativa, Informática da biodiversidade, ENM/SDM, Ciência de dados feminista
+- __Andrea Sánchez-Tapia__ Bióloga (UNAL - Colômbia), MSc. Ecologia (UFRJ), Dra. em Botânica (ENBT-JBRJ). Usuária de R desde 2009. Ecologia quantitativa, Informática da biodiversidade, Ecologia de comunidades, Ciência de dados feminista
 --
-
 
 - __Sara Ribeiro Mortara__
 Bióloga (ESALQ/USP), MSc. Ecologia e Conservação da Biodiversidade (UESC) e Dra. em Ecologia (USP). Usuária de R desde 2009. Modelagem estatística, Ecologia & Ciência de dados feminista
 --
 
+- __¡liibre!__ se propõe a criar um ambiente de ensino e aprendizagem de habilidades computacionais a partir de uma perspectiva de ciência de dados feminista, responsável, aberta e para todes.
+
 ---
-
-
 ## projetos
 
-- pacote [**.red[coronabr]**](https://liibre.github.io/coronabr/about.html)
+- pacote [coronabr](https://liibre.github.io/coronabr/about.html)
 
-- pacote [__.red[modleR]__](https://model-r.github.io/modleR/]modleR)
+- pacote [modleR](https://model-r.github.io/modleR/]modleR)
+
+- pacote [rocc](https://github.com/liibre/rocc) fluxos de trabalho com dados de biodiversidade (GBIF, SpeciesLink, Flora2020, GADM, WDPA)
 
 - [**Observatório COVID-19 BR**](https://covid19br.github.io/)
 
 - [**.purple[@RLadiesRio]**](https://twitter.com/RLadiesRio)
 
 <center>
-```{r logo-rladiesplus, out.width=150, echo = FALSE}
+```{r logo-rladiesplus, out.width=150, fig.align ='left', echo = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/master/stickers/rainbow-inclusive.png")
 ```
 
@@ -101,25 +102,144 @@ todos os códigos diponíveis em:
 `r icon::fa("r-project")`  https://rstudio.cloud/project/1878325
 
 ---
-
 ## por que R?
 
-- script é essencial para reprodutibilidade, mas não a garante 
+- linguagem de __código aberto__, __livre__ & __sem custo__: um dos pilares da ciência aberta
+
 --
 
+- __baseada em scripts__: essencial para reprodutibilidade, facilidade para ampliar a escala, transparência, correção/robusteza 
 
-- __código aberto__, __livre__ & __sem custo__
 --
-
 
 - acessível (em comparação a outras linguagens de programação)
+
 --
 
+- muito comum na Biologia, Ciência de Dados e outras áreas. A escolha para quem precisa fazer analises estatísticas
 
-- muito comum na Biologia, Ciência de Dados e em diversas áreas
+--
+
++ __interdisciplinária e modular__: muitos especialistas escrevem pacotes 
+
+--
+
++ uma filosofia de passar facilmente do uso à criação (programação)
 
 ---
+## por que R?
 
++ ferramentas para __comunicar os resultados__: manuscritos, presentações, apps, _dashboards_
+
+--
+
++ comunicação com otras linguagens de programação (ex. python e __reticulate__) 
+
+--
+
++ ótima capacidade gráfica 
+
+--
+
++ __suporte oficial__: documentação, vignettes, listas de email
+
+--
+
++ suporte não oficial: uma comunidade ativa: listas de email, grupos de usuáries \n (useR), capítulos de .purple[R-Ladies+], comunidade de  [RStudio](community.rstudio.com/) 
+Stack Overflow, `r icon::fa("twitter")` `#rstats`
+
+```{r remedy001, out.width=150, echo = FALSE}
+knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/master/stickers/rainbow-inclusive.png")
+```
+
+---
+## `R` tem uma estrutura modular: __pacotes__
+--
+
++ a instalação de base de `R` inclui pacotes mantidos pelo __`R` Core Development Team__
+
+--
+
++ repositório oficial de pacotes: __CRAN__ (The Comprehensive `R` Archive Network) or Bioconductor, GitHub, rOpenSci.org
+
+
+---
+background-image:url("figs/rstudio.png")
+background-size: 60%
+## rodando R em RStudio
+
+`r icon::fa("laptop-code", size = 3)`
+
+---
+class: inverse, middle, center
+## Configuração e organização de projetos 
+
+---
+## pasta de trabalho
+
++ R tem que saber em que pasta você está trabalhando, para poder buscar os arquivos que você quer ler, e saber onde guardar os resultados de suas análises: __working directory__: pasta de trabalho
+
+--
+
++ para saber onde você está: `getwd()`
+
+--
+
++ você pode mudar esta localização usando `setwd()`
+
+--
+
++ melhor ainda: em vez de abrir RStudio e procurar a pasta, é melhor abrir um script de R (extensão `.R`) ou um projeto de __RStudio project__ (extensão `.Rproj`). (Igual ao que você faria abrindo um arquivo de texto `r icon::fa("file-word")`)
+
+---
+## organização de projetos e Boas Práticas
+
++ cada projeto de análise de dados deveria estar em __uma pasta separada__, e __subpastas__ para organizar o conteúdo
+
+--
+
++ os __dados originais__ não devem ser modificados. qualquer modificação deve ser salva à parte, junto com os scripts que fizeram a modificação.
+
+--
+
++ em vez de usar __caminhos absolutos__ deve-se usar __caminhos relativos__:
+  + `.` "aqui" (o resultado de `getwd()`)
+  + `./subpastas` (ex. `/figs`)
+  + o nível acima `..`
+  
+--
+
++ evite `C:usuario/seu_nome/suas_pastas/seu_projeto` -> isto são caminhos absolutos
+
+---
+## o projeto atual
+
+```
+  .
+  ├── README.md
+  ├── codigo
+  │   ├── 01-intro.R
+  │   ├── 02-fluxo_trabalho.R
+  │   ├── 03-manipulacao_dados.R
+  │   └── 04-graficos.R
+* ├── figuras
+* ├── resultados
+  └── instituto_hub_demo.Rproj
+```
+
+<center>
+`r icon::fa("laptop-code", size = 3)`
+</center>
+
+---
+## os projetos de RStudio
+
++ arquivos com extensão __.Rproj__ para abrir a sessão de R no local correto
+
+---
+Procurando ajuda em R
+
+---
 ## Outras fontes de ajuda
 
 + Taskviews 
