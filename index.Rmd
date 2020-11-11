@@ -271,7 +271,7 @@ class: inverse, middle, center
 
 --
 
-+ um script lê ou cria objetos e salva tabelas `.csv`, figuras (`.png`) ou objetos individuais de `R`
++ um script deveria ler ou criar objetos no início e salvar resultados no final (tabelas `.csv`, figuras ou objetos individuais de `R`)
 
 --
 
@@ -286,11 +286,99 @@ background-position: 60% 100%
 #### nas opções gerais
 ]
 
----
-class: inverse, middle, center
-# funções, argumentos e entendendo a ajuda
 
 ---
+## tipos de dados em R
+
++ R aceita dados __numéricos__ ("numeric" e "integer" para números inteiros), de __texto__ (_character_), valores lógicos (`TRUE/FALSE`), entre outros
+
+<small>
+
+```{r vetores}
+populacao <- c(1500, 2000)
+estados <- c("Amapá",
+             "Rio de Janeiro",
+             "Minas Gerais")
+class(populacao)
+class(estados)
+```
+</small>
+
+---
+## tipos de dados em R
+
+<small>
+
+```{r vetores2}
+verdadeiro_falso <- c(FALSE, TRUE)
+class(verdadeiro_falso)
+posicao <- c(1L, 2L)
+class(posicao)
+```
+</small>
+
+---
+## vetores
+
++ `c()` para criar - "concatenar"
+
+```{r}
+str(estados) #estrutura
+length(estados)
+```
+
+---
+## selecionando elementos de vetores
+
++ entre __colchetes__ `[]`
++ com vetores de __posição__ ou vetores __lógicos__ (`TRUE/FALSE`)
+
+<small>
+```{r}
+estados[1]
+estados[c(TRUE, FALSE, TRUE)]
+estados[1:2]
+```
+</small>
+
+---
+##  Algumas funções importantes
+
+```{r}
+1:10
+seq(1, 10, 2)
+rep(1:4, 2)
+rep(1:4, each = 2)
+```
+
+---
+## funções, argumentos e entendendo a ajuda
+
+
+---
+## estruturas de dados em `R`
+
++ __vetor__: lineal, uma dimensão só: `length()`
+
+--
+
++ __fatores__: vetores  que representam __variáveis categóricas__ e portanto têm níveis (__levels()__)
+
+--
+
++ __matrizes__: arranjos de duas dimensões de __dados do mesmo tipo__ (`dim()`, `nrow()`, `ncol()`). __Em R sempre linhas primeiro, colunas depois__
+
+--
+
++ __data frames__: arranjos bi-dimensionais de dados de diferentes tipos (i.e., uma coluna numérica, outra com nomes, outra com um fator etc.)
+
+--
+
++ __listas__: literalmente listas de qualquer outro objeto (inclusive listas) 
+
+
+---
+
 # Vamos começar 
 
 ```{r, eval = F}
