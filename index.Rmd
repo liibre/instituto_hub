@@ -63,18 +63,16 @@ Bióloga (ESALQ/USP), MSc. Ecologia e Conservação da Biodiversidade (UESC) e D
 ---
 ## projetos
 
-- pacote [coronabr](https://liibre.github.io/coronabr/about.html)
+- pacotes [coronabr](https://liibre.github.io/coronabr/about.html) , [modleR](https://model-r.github.io/modleR/]modleR), [rocc](https://github.com/liibre/rocc), [dados](https://github.com/cienciadedatos/dados)
 
-- pacote [modleR](https://model-r.github.io/modleR/]modleR)
-
-- pacote [rocc](https://github.com/liibre/rocc) fluxos de trabalho com dados de biodiversidade (GBIF, SpeciesLink, Flora2020, GADM, WDPA)
+- curso de _Projetos de análise de dados usando R_ no Jardim Botânico do Rio de Janeiro
 
 - [**Observatório COVID-19 BR**](https://covid19br.github.io/)
 
-- [**.purple[@RLadiesRio]**](https://twitter.com/RLadiesRio)
+- Capítulo de RLadies+ Rio de Janeiro [**.purple[@RLadiesRio]**](https://twitter.com/RLadiesRio)
 
-<center>
-```{r logo-rladiesplus, out.width=150, fig.align ='left', echo = FALSE}
+
+```{r logo-rladiesplus, out.width=150, fig.align ='right', echo = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/master/stickers/rainbow-inclusive.png")
 ```
 
@@ -129,7 +127,7 @@ todos os códigos diponíveis em:
 ---
 ## por que R?
 
-+ ferramentas para __comunicar os resultados__: manuscritos, presentações, apps, _dashboards_
++ ferramentas para __comunicar os resultados__: manuscritos, presentações, _apps_
 
 --
 
@@ -145,7 +143,7 @@ todos os códigos diponíveis em:
 
 --
 
-+ suporte não oficial: uma comunidade ativa: listas de email, grupos de usuáries \n (useR), capítulos de .purple[R-Ladies+], comunidade de  [RStudio](community.rstudio.com/) 
++ suporte não oficial: uma comunidade ativa: listas de email, grupos de usuáries (useR), capítulos de .purple[R-Ladies+], comunidade de  [RStudio](community.rstudio.com/) 
 Stack Overflow, `r icon::fa("twitter")` `#rstats`
 
 ```{r remedy001, out.width=150, echo = FALSE}
@@ -237,7 +235,78 @@ class: inverse, middle, center
 + arquivos com extensão __.Rproj__ para abrir a sessão de R no local correto
 
 ---
-Procurando ajuda em R
+class: inverse, middle, center
+
+## Introdução a R
+
+---
+## Introdução a R
+
++ `<-` - para atribuição a objetos
+
+--
+
++ cria dentro do espaço de trabalho "__workspace__", aba __Environment__ de RStudio
+
+--
+
++ pode explorar com `ls()`
+
+---
+## o _workspace_
+
++ quando você cria objetos eles ocupam memória RAM do computador
+
+--
+
++ ele pode ser salvo e carregado entre sessões mas não é recomendável fazer isto `#boaspráticas`
+
+--
+
++ você pode perder controle de como foram criados os objetos - pode guardar objetos com erros
+
+--
+
++ vamos confiar no __script__
+
+--
+
++ um script lê ou cria objetos e salva tabelas `.csv`, figuras (`.png`) ou objetos individuais de `R`
+
+--
+
++ é bom criar diferentes scripts sucessivos para manter a ordem
+
+---
+background-image:url("figs/0a_setup.png")
+background-size: 60%
+background-position: 60% 100%
+
+.pull-left[
+#### nas opções gerais
+]
+
+---
+class: inverse, middle, center
+# funções, argumentos e entendendo a ajuda
+
+---
+# Vamos começar 
+
+```{r, eval = F}
+# Para instalar pacotes
+install.packages("remotes")
+
+# Para instalar coronabr
+remotes::install_github("liibre/coronabr")
+
+# Para carregar coronabr
+library(coronabr)
+
+```
+
+---
+## Procurando ajuda em R
 
 ---
 ## Outras fontes de ajuda
