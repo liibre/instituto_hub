@@ -22,14 +22,18 @@ Antes da oficina, recomendamos que você instale R e RStudio.
 
 ## Download e instalação de RStudio
 
-Faça download e instale RStudio desde [https://www.rstudio.com/products/rstudio/download/#download](https://www.rstudio.com/products/rstudio/download/#download). Buque a versão mais adequada para seu sistema operativo (Windows, Mac ou Linux).
+Faça download e instale RStudio desde [https://www.rstudio.com/products/rstudio/download/#download](https://www.rstudio.com/products/rstudio/download/#download). Busque a versão mais adequada para seu sistema operativo (Windows, Mac ou Linux).
 
 
 # _Download_ do material da oficina
 
-A página [https://github.com/liibre/instituto_hub_demo](https://github.com/liibre/instituto_hub_demo) tem um repositório de exemplo para que você trabalhe durante a oficina. Faça download do arquivo ZIP com este projeto clicando neste link [https://github.com/liibre/instituto_hub_demo/archive/main.zip](https://github.com/liibre/instituto_hub_demo/archive/main.zip).
+A página [https://github.com/liibre/instituto_hub_demo](https://github.com/liibre/instituto_hub_demo) tem um repositório de exemplo para que você trabalhe durante a oficina.
+Você pode fazer o download do arquivo ZIP:
 
-Deszipe o arquivo .zip e entre no folder. Abra o projeto fazendo click em __instituto_hub_demo.Rproj__
++ clicando no botão verde "Code""e selecionando a última opção: __download_zip__ ou
++ clicando neste link <https://github.com/liibre/instituto_hub_demo/archive/main.zip>.
+
+Deszipe o arquivo .zip e entre na pasta. Abra o projeto fazendo click em __instituto\_hub\_demo.Rproj__
 
 Se o RStudio abrir e você conseguir ver o projeto aberto na esquina superior direita da janela de RStudio, está pronta para participar :) 
 
@@ -43,3 +47,6 @@ include_graphics("figs/rstudio.png")
 Se você tiver problemas para instalar R ou RStudio no seu computador, acesse o seguinte [link](https://rstudio.cloud/project/1878325) e siga as instruções para criar uma conta em [RStudio Cloud](https://rstudio.cloud/). 
 
 Nota: este serviço tem capacidade limitada de processamento. Procure utilizar esta opção apenas se não conseguir realizar a instalação local. 
+
+
+Se tiver qualquer dúvida, entre em contato conosco: [liibrelab@gmail.com](mailto:liibrelab@gmail.com)

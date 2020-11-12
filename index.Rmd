@@ -354,6 +354,11 @@ rep(1:4, each = 2)
 ---
 ## funções, argumentos e entendendo a ajuda
 
+```
+help(funcao)
+?funcao
+??palavra_chave
+```
 
 ---
 ## estruturas de dados em `R`
@@ -392,6 +397,13 @@ remotes::install_github("liibre/coronabr")
 library(coronabr)
 
 ```
+
+---
+Data frames 
+
+dim(), ncol(), nrow(), selecionar colunas e filtrar linhas. Também com cláusulas lógicas afinal.
+
+criar novas colunas 
 
 ---
 ## Procurando ajuda em R

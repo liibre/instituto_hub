@@ -29,18 +29,22 @@ Antes da oficina, recomendamos que você instale R e RStudio.
 ## Download e instalação de RStudio
 
 Faça download e instale RStudio desde
-<https://www.rstudio.com/products/rstudio/download/#download>. Buque a
+<https://www.rstudio.com/products/rstudio/download/#download>. Busque a
 versão mais adequada para seu sistema operativo (Windows, Mac ou Linux).
 
 # *Download* do material da oficina
 
 A página <https://github.com/liibre/instituto_hub_demo> tem um
-repositório de exemplo para que você trabalhe durante a oficina. Faça
-download do arquivo ZIP com este projeto clicando neste link
-<https://github.com/liibre/instituto_hub_demo/archive/main.zip>.
+repositório de exemplo para que você trabalhe durante a oficina. Você
+pode fazer o download do arquivo ZIP:
 
-Deszipe o arquivo .zip e entre no folder. Abra o projeto fazendo click
-em **instituto\_hub\_demo.Rproj**
+  - clicando no botão verde “Code”"e selecionando a última opção:
+    **download\_zip** ou
+  - clicando neste link
+    <https://github.com/liibre/instituto_hub_demo/archive/main.zip>.
+
+Deszipe o arquivo .zip e entre na pasta. Abra o projeto fazendo click em
+**instituto\_hub\_demo.Rproj**
 
 Se o RStudio abrir e você conseguir ver o projeto aberto na esquina
 superior direita da janela de RStudio, está pronta para participar :)
@@ -56,3 +60,6 @@ Cloud](https://rstudio.cloud/).
 
 Nota: este serviço tem capacidade limitada de processamento. Procure
 utilizar esta opção apenas se não conseguir realizar a instalação local.
+
+Se tiver qualquer dúvida, entre em contato conosco:
+<liibrelab@gmail.com>
