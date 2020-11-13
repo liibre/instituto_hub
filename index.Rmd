@@ -15,6 +15,7 @@ output:
 
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE, cache = TRUE)
+
 ```
 
 ```{r xaringanthemer, include = FALSE}
@@ -42,6 +43,16 @@ xaringanthemer::style_mono_accent(
   )
 ```
 
+```{r xaringanExtra-clipboard, echo=FALSE}
+htmltools::tagList(
+  xaringanExtra::use_clipboard(
+    button_text = "<i class=\"fa fa-clipboard\"></i>",
+    success_text = "<i class=\"fa fa-check\" style=\"color: #90BE6D\"></i>",
+    error_text = "<i class=\"fa fa-times-circle\" style=\"color: #F94144\"></i>"
+  ),
+  rmarkdown::html_dependency_font_awesome()
+)
+```
 ## apresentação
 
 ```{r logo-liibre, echo = FALSE}
@@ -169,13 +180,34 @@ knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/m
 
 + repositório oficial de pacotes: __CRAN__ (The Comprehensive `R` Archive Network) or Bioconductor, GitHub, rOpenSci.org
 
+--
+
++ os pacotes são coleções de __funções__ 
+
+--
+
++ as funções têm __opções__: "parâmetros", "argumentos"
 
 ---
 background-image:url("figs/rstudio.png")
 background-size: 60%
+background-position: 50% 90%
+
 ## rodando R em RStudio
 
++ deszipe o arquivo ZIP, entre na pasta e clique no arquivo __instituto_hub_demo.Rproj__
+
 `r icon::fa("laptop-code", size = 3)`
+
+---
+## RStudio 
+
++ quatro paineis (script, console, várias abas: help, environment, plots, files...)
+
++ podemos executar código no console mas vamos usar o __script__ para guardar os passos. 
+
++ escrever no script e clicar `control + enter` para mandar o conteúdo para o console.
+
 
 ---
 class: inverse, middle, center
@@ -252,10 +284,12 @@ class: inverse, middle, center
 ---
 class: inverse, middle, center
 
-## Introdução a R
+## introdução a R
+
+`r icon::fa("laptop-code", size = 3)`
 
 ---
-## Criação de objetos e o _workspace_
+## criação de objetos e o _workspace_
 
 + `<-` - para atribuição a objetos
 
@@ -281,7 +315,7 @@ class: inverse, middle, center
   + pode guardar objetos com erros e isto pode interferir no seu trabalho
 
 ---
-## Criação de objetos e o _workspace_
+## criação de objetos e o _workspace_
 
 
 + confiar no __script__ para recriar todos os objetos
@@ -311,16 +345,13 @@ background-position: 60% 100%
 ---
 ## tipos de dados em R
 
-+ R aceita dados __numéricos__ ("numeric" e "integer" para números inteiros), de __texto__ (_character_), valores lógicos (`TRUE/FALSE`), entre outros
++ R entende dados __numéricos__ (_numeric_, e _integer_ para números inteiros), de __texto__ (_character_), valores lógicos (`TRUE/FALSE`), entre outros.
 
 <small>
 
 ```{r vetores}
-populacao <- c(1500, 2000)
-estados <- c("Amapá",
-             "Rio de Janeiro",
-             "Minas Gerais", 
-             "Tocantins")
+populacao <- c(1500, 2000) 
+estados <- c("Acre", "Alagoas", "Amapá", "Amazonas", "Tocantins")
 class(populacao)
 class(estados)
 ```
@@ -333,8 +364,10 @@ class(estados)
 
 ```{r vetores2}
 verdadeiro_falso <- c(FALSE, TRUE)
+verdadeiro_falso
 class(verdadeiro_falso)
 posicao <- c(1L, 2L)
+posicao
 class(posicao)
 ```
 </small>
@@ -371,7 +404,7 @@ estados[c(1,3,5)] #tem que ser um vetor
 ---
 ## subsetting com cláusulas lógicas 
 
-```{r}
+```{r, results="hide"}
 casos <- c(150, 200, 400, 500, 500, 600)
 casos > 150
 casos[casos > 150]
@@ -384,58 +417,70 @@ casos != 200
 ---
 ## operadores lógicos
 
+.pull-left[
 + igualdade: `==`
 + diferença: `!=` (`!` em geral é negação)
 + desigualdades: `<`. `>`, `<=`, `>=`
 + união (OR/OU): `|`
 + interseção (AND): `&`
 + pertenecimento: `%in%`
-+ a negação funciona igual `!`: "não pertence a" `!a %in% b`
++ _não_ pertenecimento: `!a %in% b`
+]
 
----
-## comparing vectors
+.pull-right[
++ `casos == 200`
++ `casos != 200`
++ `casos < 300`, `casos >= 150`
++ `casos < 200 | casos > 500`
++ `casos > 200 & casos < 500`
++ `casos %in% c(100, 200, 300)`
++ `!casos %in% c(400)`
+]
 
-<small>
-```{r recycling}
+O operador lógico cria um __vetor lógico__, a seleção vai entre colchetes:
 
-animals      <- c("mouse", "rat", "dog", "cat")
-more_animals <- c("rat", "cat", "dog", "duck", "goat")
-
-animals %in% more_animals
+```{r}
+casos[casos > 150]
 ```
 
 ---
 ## comparando vetores
 
 <small>
-```{r recycling2}
-animals      <- c("mouse", "rat", "dog", "cat")
-more_animals <- c("rat", "cat", "dog", "duck", "goat")
+```{r pertenecimento}
+estados <- c("acre", "alagoas", "amapá", "amazonas")
+norte <- c("acre", "amapá", "amazonas", "pará", "rondônia",
+           "roraima" , "tocantins")
 
-animals == more_animals
+estados %in% norte
+estados[estados %in% norte]
+
 ```
 
-+ Vectors are compared __one by one AND recycled__ when one of them is shorter, so use `%in%` when you want to check __belonging to a set__
+---
+## comparando vetores
+
+<small>
+```{r reciclando, results="hide", warning=F}
+
+estados == norte
+estados[estados == norte] #por que só tem acre?
+
+```
+</small>
+
++ Os vetores são comparados __elemento por elemento__ e __reciclados__ quando um deles é mais curto. Possivelmente você está tentando usar `%in%` para checar se os elementos pertencem ao outro conjunto.
 
 
 ---
 ##  outras funções importantes
 
-```{r}
+```{r, results="hide"}
 1:10
 seq(1, 10, 2)
 rep(1:4, 2)
 rep(1:4, each = 2)
 unique(casos)
-```
-
----
-## funções, argumentos e entendendo a ajuda
-
-```
-help(funcao)
-?funcao
-??palavra_chave
 ```
 
 ---
@@ -459,9 +504,13 @@ help(funcao)
 
 + __listas__: literalmente listas de qualquer outro objeto (inclusive listas) 
 
+--
+
+__Hoje: data.frames__
+
 
 ---
-## Instalando pacotes
+## instalando pacotes
 
 ```{r, eval = F}
 # Para instalar pacotes
@@ -472,24 +521,38 @@ remotes::install_github("liibre/coronabr")
 
 # Para carregar pacotes
 library(coronabr)
+
+# Para buscar ajuda
 ?coronabr
 ```
 
 ---
-## Usando funções
+## funções, argumentos e entendendo a ajuda
 
-```r
-?get_corona_br
-args(get_corona_br)
-help("get_corona_br")
+.pull-left[
 ```
+help(funcao)
+?funcao
+??palavra_chave
+args(funcao)
+```
+]
 
-ou selecionar o nome da função e clicar F1
+.pull-right[
+```r
+help("get_corona_br")
+?get_corona_br
+??corona
+args(get_corona_br)
+```
+]
 
-Vai abrir na aba __Help__
++ ou selecionar o nome da função e clicar __F1__
+
++ No __help__ estão os argumentos na ordem correta, e os valores padrão (por _default_) estão indicados. Se a gente não especificasse a função usaria esses valores.  
 
 ---
-## Download dos dados para Amapá
+## download dos dados para Amapá
 
 + Criar pasta à mão ou usar `dir.create()`
 
@@ -500,22 +563,47 @@ library(coronabr)
 ```{r}
 caminho <- "dados/brutos"  #poderia ser "./dados/brutos"
 dir.create(path = caminho, recursive = TRUE)
-ap <- get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
+amapa <- get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
 ```
 
-+ No help estão os argumentos na ordem correta, e os valores padrão (por _default_) estão indicados. Se a gente não especificasse a função usaria esses valores.  
+---
+## data frames 
+
++ Duas dimensões (linhas e colunas): `dim()`, `ncol()`, `nrow()`
+
++ Em R sempre primeiro linhas, logo colunas. 
+
++ Podem ser diferentes tipos de dado
+
++ Idealmente: __uma linha por observação__, __uma coluna por variável__
 
 ---
-## Data frames 
+## inspecionar objetos `data.frame`
 
-+ Duas dimensões: `dim()`, `ncol()`, `nrow()`
-
-+ Selecionar colunas e filtrar linhas. Também com cláusulas lógicas afinal.
-
-+ 
+```{r try, echo = TRUE, eval = FALSE}
+names(amapa)
+dim(amapa)
+nrow(amapa)
+ncol(amapa)
+head(amapa) # 6 linhas por defeito
+tail(amapa)
+rownames(amapa)
+length(amapa) # numero de colunas
+summary(amapa) # quantis e a média 
+```
 
 ---
-## Procurando ajuda em R
+## selecionar colunas e filtrar linhas
+
++ entre colchetes também mas __as dimensões separadas por uma vírgula__
+
+`amapa[linhas, colunas]`
+
+```{r}
+amapa[,1:3] #três primeiras colunas
+amapa[4,13] #quarto elemento da coluna 13
+
+```
 
 ---
 ## Outras fontes de ajuda
