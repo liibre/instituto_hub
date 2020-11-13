@@ -69,12 +69,12 @@ xaringanExtra::use_logo(image_url = "https://raw.githubusercontent.com/liibre/lo
 Bióloga (ESALQ/USP), MSc. Ecologia e Conservação da Biodiversidade (UESC) e Dra. em Ecologia (USP). Usuária de R desde 2009. Modelagem estatística, Ecologia & Ciência de dados feminista
 --
 
-- __¡liibre!__ se propõe a criar um ambiente de ensino e aprendizagem de habilidades computacionais a partir de uma perspectiva de ciência de dados feminista, responsável, aberta e para todes.
+- __¡liibre!__ se propõe a criar um ambiente de ensino e aprendizagem de habilidades computacionais a partir de uma perspectiva de ciência de dados feminista, responsável, aberta e para todes
 
 ---
 ## projetos
 
-- pacotes [coronabr](https://liibre.github.io/coronabr/about.html) , [modleR](https://model-r.github.io/modleR/]modleR), [rocc](https://github.com/liibre/rocc), [dados](https://github.com/cienciadedatos/dados)
+- pacotes [coronabr](https://liibre.github.io/coronabr/about.html) , [modleR](https://model-r.github.io/modleR/]modleR), [Rocc](https://github.com/liibre/rocc), [dados](https://github.com/cienciadedatos/dados)
 
 - curso de _Projetos de análise de dados usando R_ no Jardim Botânico do Rio de Janeiro
 
@@ -138,7 +138,7 @@ todos os códigos diponíveis em:
 
 --
 
-+ __interdisciplinária e modular__: muitos especialistas escrevem pacotes 
++ __interdisciplinar e modular__: muitos especialistas escrevem pacotes 
 
 --
 
@@ -195,7 +195,7 @@ background-position: 50% 90%
 
 ## rodando R em RStudio
 
-+ deszipe o arquivo ZIP, entre na pasta e clique no arquivo __instituto_hub_demo.Rproj__
++ descompacte o arquivo .zip, entre na pasta e clique no arquivo __instituto_hub_demo.Rproj__
 
 `r icon::fa("laptop-code", size = 3)`
 
@@ -585,7 +585,7 @@ names(amapa)
 dim(amapa)
 nrow(amapa)
 ncol(amapa)
-head(amapa) # 6 linhas por defeito
+head(amapa) # 6 linhas por padrão
 tail(amapa)
 rownames(amapa)
 length(amapa) # numero de colunas
@@ -600,8 +600,8 @@ summary(amapa) # quantis e a média
 `amapa[linhas, colunas]`
 
 ```{r}
-amapa[,1:3] #três primeiras colunas
-amapa[4,13] #quarto elemento da coluna 13
+amapa[, 1:3] #três primeiras colunas
+amapa[4, 13] #quarto elemento da coluna 13
 
 ```
 
