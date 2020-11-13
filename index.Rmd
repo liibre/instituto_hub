@@ -120,6 +120,12 @@ todos os códigos diponíveis em:
 + tem um botão verde para contar se tudo está certo. Periodicamente vamos perguntar se todo mundo está acompanhando, por favor use este botão ou responda no chat
 
 ---
+class: inverse, middle, center
+
+# 1. conhecendo a linguagem R e fluxo de trabalho
+
+
+---
 ## por que R?
 
 - linguagem de __código aberto__, __livre__ & __sem custo__: um dos pilares da ciência aberta
@@ -211,7 +217,7 @@ background-position: 50% 90%
 
 ---
 class: inverse, middle, center
-## Configuração e organização de projetos 
+## configuração e organização de projetos 
 
 ---
 ## pasta de trabalho
@@ -340,6 +346,12 @@ background-position: 60% 100%
 .pull-left[
 #### nas opções gerais
 ]
+
+
+---
+class: inverse, middle, center
+
+# 2. introdução ao R
 
 
 ---
@@ -560,7 +572,15 @@ args(get_corona_br)
 library(coronabr)
 ```
 
-```{r}
+```{r, echo = FALSE}
+# colocando aqui para nao fazer o download toda vez :P
+amapa <- read.csv("dados/brutos/01-amapa.csv", stringsAsFactors = FALSE)
+amapa$date <- as.Date(amapa$date)
+amapa$last_available_date <- as.Date(amapa$last_available_date)
+```
+
+
+```{r, eval = FALSE}
 caminho <- "dados/brutos"  #poderia ser "./dados/brutos"
 dir.create(path = caminho, recursive = TRUE)
 amapa <- get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
@@ -604,6 +624,17 @@ amapa[, 1:3] #três primeiras colunas
 amapa[4, 13] #quarto elemento da coluna 13
 
 ```
+
+---
+class: inverse, middle, center
+
+# 3. manipulação de dados
+
+---
+class: inverse, middle, center
+
+# 4. criando figuras básicas
+
 
 ---
 ## Outras fontes de ajuda
