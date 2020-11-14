@@ -1096,6 +1096,8 @@ plot(new_confirmed ~ date, data = macapa,
      col = vermelho_trans, # muda cor
      pch = 19,# muda tipo de ponto
      log = "y") # escala log no eixo y
+mtext("Fonte: Brasil.io", side = 1, adj = 1,
+      padj = 8, cex = 0.8) # texto adicional
 lines(new_confirmed ~ date, data = macapa, 
       col = vermelho_trans)
 ```
@@ -1113,6 +1115,8 @@ plot(new_confirmed ~ date, data = macapa,
      col = vermelho_trans, 
      pch = 19,# muda tipo de ponto
      log = "y") # escala log no eixo y
+mtext("Fonte: Brasil.io", side = 1, adj = 1,
+      padj = 8, cex = 0.8) # texto adicional
 lines(new_confirmed ~ date, data = macapa, 
       col = vermelho_trans)
 ```
@@ -1131,6 +1135,8 @@ plot(new_confirmed ~ date, data = macapa,
      col = vermelho_trans, # muda cor
      pch = 19,# muda tipo de ponto
      log = "y") # escala log no eixo y
+mtext("Fonte: Brasil.io", side = 1, adj = 1,
+      padj = 8, cex = 0.8) # texto adicional
 lines(new_confirmed ~ date, data = macapa, 
       col = vermelho_trans)
 dev.off()
@@ -1221,6 +1227,7 @@ include_graphics("./figs/diarios_AP.png")
 ---
 ## fontes de ajuda 
 
++ Livro [Data feminism](https://data-feminism.mitpress.mit.edu/)
 + Material de estudo em português [link](https://github.com/beatrizmilz/materiais_estudo_R)
 + [LearnR4Free](https://www.learnr4free.com/) em inglês e em espanhol
 + Disciplina *Projetos de análise de dados usando R* [link](https://github.com/liibre/curso)
