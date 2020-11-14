@@ -14,8 +14,3 @@
 
 # R Environment Variables
 .Renviron
-
-# slides
-*.css
-libs/
-
