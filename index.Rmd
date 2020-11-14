@@ -18,7 +18,14 @@ options(htmltools.dir.version = FALSE, cache = TRUE)
 
 ```
 
+```{css, echo = FALSE}
+.tiny .remark-code { /*Change made here*/
+  font-size: 60% !important;
+}
+```
+
 ```{r xaringanthemer, include = FALSE}
+library(knitr)
 library(xaringanthemer)
 library(xaringanExtra)
 xaringanthemer::style_mono_accent(
@@ -601,7 +608,7 @@ amapa <- get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
 
 --
 
-+ Em R sempre primeiro linhas, logo colunas. 
++ Em R sempre primeiro linhas, depois colunas
 
 --
 
@@ -643,19 +650,506 @@ amapa[4, 13] #quarto elemento da coluna 13
 
 ```
 
+
 ---
 class: inverse, middle, center
 
 # 3. manipulação de dados
 
 ---
+## estrutura de tabelas
+
+- cada __variável__ uma coluna 
+
+- cada __observação__ uma linha
+
+- estado da variável --> __valor __
+
+- em geral em `data.frame` ou `tibble`
+
+---
+## tidy data 
+
+
+.pull-left[
+- dados são inerentemente confusos
+
+
+- dados precisam ser organizados e domados
+
+
+- organizados e domados para quem?
+
+- ideia de que os dados devem ser limpos e controlados tem raízes históricas
+
+]
+
+.pull-right[
+```{r echo = FALSE}
+include_graphics("https://www.measureevaluation.org/resources/newsroom/news-images/tidy-data/image")
+```
+]
+
+---
+## responsabilidade com os dados
+
+.pull-left[
+- parcialidade
+
+- transparência
+
+- co-liberação
+
+- pluralismo
+]
+
+.pull-right[
+```{r, echo = FALSE, out.width=300}
+include_graphics("figs/data_feminism.png")
+```
+]
+
+---
+## dados de COVID-19: responsabilidade & contexto
+
+- dados deveriam ser abertos e acessíveis
+  
+  [Trânsparência COVID-19 OPEN KNOWLEDGE BRASIL](https://transparenciacovid19.ok.org.br)
+  
+  
+- nem toda análise que **pode** ser feita, **deve** ser feita 
+
+
+- cada dado diz respeito a uma pessoa
+
+
+- para COVID-19 e SRAG: **subnotificação** & **atraso**
+
+
+- inconsistência com dados reportados em diferentes escalas: município, estado, país
+
+
+---
+## lendo os dados
+
+.tiny[
+```{r}
+amapa <- read.csv("dados/brutos/01-amapa.csv")
+head(amapa[c(3, 4, 9:18)])
+```
+]
+---
+## municipios do Amapá
+
+```{r}
+unique(amapa$city)
+
+
+```
+
+---
+## dados de municípios & do estado
+
+```{r}
+table(amapa$place_type)
+
+unique(amapa$place_type[is.na(amapa$city)])
+```
+
+---
+## a classe data
+
+```{r}
+class(amapa$date)
+class(amapa$last_available_date)
+```
+
+---
+## convertendo para a classe data
+
+```{r}
+amapa$date <- as.Date(amapa$date)
+amapa$last_available_date <- as.Date(amapa$last_available_date)
+
+class(amapa$date)
+
+range(amapa$date)
+```
+
+---
+# usando a função `aggregate()` 
+
+.tiny[
+```{r}
+acu <- aggregate(last_available_confirmed ~ city, FUN = max, data = amapa)
+acu
+
+```
+]
+
+
+---
+## um gráfico de barras
+
+.tiny[
+```{r fig.align='center'}
+barplot(acu[, 2], names.arg = acu[, 1])
+```
+]
+
+---
+## ordenando o objeto
+
+.tiny[
+```{r}
+acu.or <- acu[order(acu$last_available_confirmed), ]
+acu.or
+```
+]
+
+---
+## novamente, o gráfico de barras
+
+.tiny[
+```{r fig.align='center'}
+barplot(acu.or[, 2], names.arg = acu.or[, 1])
+```
+]
+
+---
+## selecionando partes do dado
+
+```{r}
+estado <- amapa[amapa$place_type == "state", c(-15)]
+dim(estado)
+```
+
+
+---
+## mesma tarefa, de outra forma
+
+```{r}
+# outra forma: onde a coluna city é NA
+estado2 <- amapa[is.na(amapa$city), c(-15)]
+## as duas formas tem o mesmo resultado:
+all.equal(estado2, estado)
+```
+
+---
+## apenas o município de Macapá
+
+```{r}
+# dados apenas de Macapa por meio do geocode do IBGE
+macapa <- amapa[amapa$city_ibge_code == "1600303", c(-15)]
+```
+
+
+---
+## para exportar os dados
+
+```{r}
+if (!dir.exists("dados/processados/")) {
+  dir.create("dados/processados/")
+}
+
+# Escrevendo os dados
+write.csv(estado, 
+          "dados/processados/02-estado_AP.csv",
+          row.names = FALSE)
+
+write.csv(macapa, 
+          "dados/processados/02-municipio_Macapa.csv", 
+          row.names = FALSE)
+```
+
+---
+## casos novos no Macapá
+
+```{r, eval = FALSE}
+plot(last_available_confirmed ~ date, data = macapa)
+lines(last_available_confirmed ~ date, data = macapa)
+```
+
+---
+## casos novos no Macapá
+
+```{r, echo = FALSE, fig.align='center'}
+plot(last_available_confirmed ~ date, data = macapa)
+lines(last_available_confirmed ~ date, data = macapa)
+```
+
+
+---
+## apagão
+
+```{r, fig.align='center', out.width=400, echo = FALSE}
+include_graphics("./figs/AP_design_ativista.png")
+```
+
+`r icon::fa("instagram")` @designativista
+
+
+---
+## novos casos no estado do Amapá
+
+```{r eval = FALSE}
+# para o estado todo
+plot(last_available_confirmed ~ date, data = estado,
+     xlab = "Data de notificação", ylab = "Casos acumulados")
+lines(last_available_confirmed ~ date, data = estado)
+```
+
+---
+## novos casos no estado do Amapá
+
+```{r echo = FALSE, fig.align='center'}
+# para o estado todo
+plot(last_available_confirmed ~ date, data = estado,
+     xlab = "Data de notificação", ylab = "Casos acumulados")
+lines(last_available_confirmed ~ date, data = estado)
+```
+
+---
+## estado & município
+
+```{r eval = FALSE}
+# para o estado todo
+plot(last_available_confirmed ~ date, data = estado,
+     xlab = "Data de notificação", ylab = "Casos acumulados")
+lines(last_available_confirmed ~ date, data = estado)
+# linhas e pontos do municipio Macapa
+lines(last_available_confirmed ~ date, data = macapa, col = "red")
+points(last_available_confirmed ~ date, data = macapa, col = "red")
+# legenda
+legend("topleft", c("estado AP", "município Macapá"), 
+       pch = 1, col = c("black", "red"))
+
+```
+
+---
+## estado & município
+
+```{r echo = FALSE, fig.align='center'}
+# para o estado todo
+plot(last_available_confirmed ~ date, data = estado,
+     xlab = "Data de notificação", ylab = "Casos acumulados")
+lines(last_available_confirmed ~ date, data = estado)
+lines(last_available_confirmed ~ date, data = macapa, col = "red")
+points(last_available_confirmed ~ date, data = macapa, col = "red")
+legend("topleft", c("estado AP", "município Macapá"), 
+       pch = 1, col = c("black", "red"))
+
+```
+
+---
+## gráfico de dispersão
+
+```{r eval = FALSE}
+plot(x = amapa$estimated_population, 
+     y = amapa$last_available_confirmed)
+```
+
+---
+## gráfico de dispersão
+
+```{r echo = FALSE, fig.align='center'}
+plot(x = amapa$estimated_population, 
+     y = amapa$last_available_confirmed)
+```
+
+---
+## boxplot
+
+```{r eval = FALSE}
+boxplot(last_available_death_rate ~ city, 
+        data = amapa)
+```
+
+---
+## boxplot
+
+```{r echo = FALSE, fig.align='center'}
+boxplot(last_available_death_rate ~ city, 
+        data = amapa)
+```
+
+---
+## entendendo o boxplot
+
+```{r, echo=FALSE, fig.show='asis', fig.align='center', fig.width=8, fig.height=7}
+set.seed(2)
+par(bty = "n")
+bp <- rnorm(1000, 0, 0.1)
+boxplot(bp, yaxt = "n", xlim = c(0, 3), ylim = c(-0.3, 0.3))
+text(x = 1.82, y = min(bp), "último ponto (-1,5 x IIQ)", cex = .9)
+text(x = 1.72, y = quantile(bp)[2], "primeiro quartil", cex = .9)
+text(x = 1.72, y = median(bp), "mediana", cex = .9)
+text(x = 1.72, y = quantile(bp)[4], "terceiro quartil", cex = .9)
+text(x = 1.82, y = bp[203], "último ponto (+1,5 x IIQ)", cex = .9)
+arrows(x0 = 0.68, x1 = 0.68, y0 = quantile(bp)[2], 
+       y1 = quantile(bp)[4], code = 3, length = 0.05)
+text(x = 0.54, y = median(bp), "IIQ", cex = .9)
+```
+
+
+---
 class: inverse, middle, center
 
 # 4. criando figuras básicas
 
+---
+## lendo os dados processados
+
+```{r}
+# Macapa
+macapa <- read.csv("dados/processados/02-municipio_Macapa.csv")
+# convertendo para classe data
+macapa$date <- as.Date(macapa$date)
+```
 
 ---
-## Outras fontes de ajuda
+## um gráfico básico
+
+```{r eval=FALSE}
+plot(new_confirmed ~ date, data = macapa)
+lines(new_confirmed ~ date, data = macapa)
+```
+
+
+---
+## um gráfico básico
+
+```{r echo=FALSE, fig.align='center'}
+plot(new_confirmed ~ date, data = macapa)
+lines(new_confirmed ~ date, data = macapa)
+```
+
+---
+## um gráfico melhor
+
+```{r eval = FALSE}
+# usando a funcao par para controlar parametros
+par(bty = "l", las = 1)
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários")
+lines(new_confirmed ~ date, data = macapa)
+```
+
+---
+## um gráfico melhor
+
+```{r echo = FALSE, fig.align='center'}
+# usando a funcao par para controlar parametros
+par(bty = "l", las = 1)
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários")
+lines(new_confirmed ~ date, data = macapa)
+```
+
+---
+# para exportar o grafico
+
+```{r eval = FALSE}
+png("figs/casos_diarios_Macapa.png", res = 300,
+    width = 1200, height = 1200)
+par(bty = "l", las = 1)
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários")
+lines(new_confirmed ~ date, data = macapa)
+dev.off()
+```
+
+---
+## ressalvas em relação aos dados brutos
+
+0.  __apagão__
+--
+
+
+1. __subnotificação__
+--
+
+
+2. __atraso__ na entrada dos dados no sistema - tanto para casos como óbitos
+--
+
+---
+## como vemos o atraso
+
+```{r gif, echo = FALSE, out.width=500, fig.align='center'}
+include_graphics("https://raw.githubusercontent.com/covid19br/covid19br.github.io/master/fig/gif_BE_05_junho.gif")
+```
+
+---
+## Observatório Covid-19BR
+
+```{r, echo = FALSE, fig.align='center'}
+include_graphics("./figs/observatorio.png")
+```
+
+
+---
+## correção por nowcasting 
+
+```{r obs-diarios,echo = FALSE, fig.align='center', out.width=700}
+include_graphics("./figs/diarios_AP.png")
+```
+
+
+---
+## como começar a usar o R
+
+- um __projeto__, uma __pergunta__, uma __análise__
+--
+
+
+- uma pasta __autocontida__
+--
+
+- um `.Rproj`
+--
+
+
+- scripts __modulares__
+--
+
+
+- compartilhar
+--
+
+
+---
+## para ter em mente
+
+
+- pensar no fluxo de trabalho
+--
+
+
+- R: __reprodutibilidade__ e __responsabilidade__
+--
+
+
+- os dados __não __ falam por si só
+--
+
+
+- entender o contexto é essencial para fazer uma boa análise
+--
+
+
+- manter-se __¡liibre!__
+
+---
+
+---
+## outras fontes de ajuda
 
 + Taskviews 
 
