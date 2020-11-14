@@ -1146,15 +1146,31 @@ include_graphics("./figs/diarios_AP.png")
 
 - manter-se __¡liibre!__
 
----
 
 ---
-## outras fontes de ajuda
+## Fontes de ajuda 
 
-+ Taskviews 
++ Material de estudo em português [link](https://github.com/beatrizmilz/materiais_estudo_R)
++ [LearnR4Free](https://www.learnr4free.com/) em inglês e em espanhol
++ Disciplina *Projetos de análise de dados usando R* [link](https://github.com/liibre/curso)
++ R Reference Card [PDF](https://cran.r-project.org/doc/contrib/Short-refcard.pdf)
++ Base R cheatsheet [PDF](https://raw.githubusercontent.com/rstudio/cheatsheets/master/base-r.pdf)
++ R Taskviews: listas de pacotes por tema curados por especialistas [link](https://cran.r-project.org/web/views/) 
++ Livro [R for Data Science](https://r4ds.had.co.nz/)
++ Pacote **dados**: os conjuntos de dados de R4DS traduzidos para o português: [GitHub](https://github.com/cienciadedatos/dados)
++ RStudio cheatsheet [PDF](https://raw.githubusercontent.com/rstudio/cheatsheets/master/rstudio-ide.pdf)
++ RStudio Data Import Cheatsheet [PDF](https://raw.githubusercontent.com/rstudio/cheatsheets/master/data-import.pdf)
++ R Bloggers https://www.r-bloggers.com/
 
-[https://cran.r-project.org/web/views/](https://cran.r-project.org/web/views/)
+---
+## Comunidades
 
++ Latin-R http://bit.ly/latinr-slack 
++ RLadies+ https://rladies.org/
++ Slack da comunidade RLadies+ https://rladies-community-slack.herokuapp.com/
++ YouTube de RLadies+ global https://www.youtube.com/c/RLadiesGlobal
++ Comunidade de RStudio https://community.rstudio.com/
++ Configuração das opções globais de RStudio [link](https://support.rstudio.com/hc/en-us/articles/200549016-Customizing-RStudio)
 
 ---
 
