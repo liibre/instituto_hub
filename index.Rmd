@@ -20,7 +20,7 @@ options(htmltools.dir.version = FALSE, cache = TRUE)
 
 ```{css, echo = FALSE, purl = FALSE}
 .tiny .remark-code { /*Change made here*/
-  font-size: 60% !important;
+    font-size: 60% !important;
 }
 ```
 
@@ -47,7 +47,7 @@ xaringanthemer::style_mono_accent(
   code_font_google   = google_font("Ubuntu Mono"),
   text_font_size = "30px",
   code_font_size = "30px",
-  )
+)
 ```
 
 ```{r xaringanExtra-clipboard, echo=FALSE, purl = FALSE}
@@ -272,11 +272,11 @@ class: inverse, middle, center
 --
 
 + em vez de usar __caminhos absolutos__ é melhor usar __caminhos relativos__
-  + evite `C://usuario/seu_nome/suas_pastas/seu_projeto` -> caminho absoluto
-  + `.` "aqui" (o resultado de `getwd()`)
-  + `./subpastas` (ex. `/figs`)
-  + o nível acima `..`
-  
++ evite `C://usuario/seu_nome/suas_pastas/seu_projeto` -> caminho absoluto
++ `.` "aqui" (o resultado de `getwd()`)
++ `./subpastas` (ex. `/figs`)
++ o nível acima `..`
+
 --
 
 + os __dados originais__ não devem ser modificados. qualquer modificação deve ser salva à parte, junto com os scripts que fizeram a modificação.
@@ -285,14 +285,14 @@ class: inverse, middle, center
 ## o projeto atual
 
 ```
- ./instituto_hub_demo/
- ├── README.md
- ├── codigo
- ├── dados
- │   ├── brutos
- │   └── processados
- ├── figs
- └── instituto_hub_demo.Rproj
+./instituto_hub_demo/
+├── README.md
+├── codigo
+├── dados
+│   ├── brutos
+│   └── processados
+├── figs
+└── instituto_hub_demo.Rproj
 ```
 
 <center>
@@ -342,8 +342,8 @@ class: inverse, middle, center
 
 --
 
-  + você pode perder controle de como foram criados os objetos
-  + pode guardar objetos com erros e isto pode interferir no seu trabalho
++ você pode perder controle de como foram criados os objetos
++ pode guardar objetos com erros e isto pode interferir no seu trabalho
 
 ---
 ## criação de objetos
@@ -564,6 +564,9 @@ library(coronabr)
 
 ```{r get_corona_br, eval = FALSE}
 caminho <- "dados/brutos"
+if (!dir.exists(caminho)) {
+  dir.create(caminho)
+}
 get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
 ```
 
@@ -663,10 +666,10 @@ include_graphics("figs/data_feminism.png")
 ## dados de COVID-19: responsabilidade & contexto
 
 - dados deveriam ser abertos e acessíveis
-  
-  [Transparência COVID-19 OPEN KNOWLEDGE BRASIL](https://transparenciacovid19.ok.org.br)
-  
-  
+
+[Transparência COVID-19 OPEN KNOWLEDGE BRASIL](https://transparenciacovid19.ok.org.br)
+
+
 - nem toda análise que **pode** ser feita **deve** ser feita 
 
 
@@ -718,6 +721,14 @@ class(amapa$last_available_date)
 ## convertendo para a classe data
 
 ```{r}
+# Conversão para data
+data1 <- as.Date(amapa$date[1])
+data1
+# Mudando o formato com a função format()
+format(data1, "%d/%m/%y")
+format(data1, "%d/%m/%Y")
+
+# Mudando a data das colunas de data
 amapa$date <- as.Date(amapa$date)
 amapa$last_available_date <- as.Date(amapa$last_available_date)
 
@@ -752,8 +763,8 @@ barplot(acu[, 2], names.arg = acu[, 1])
 
 .tiny[
 ```{r}
-acu.or <- acu[order(acu$last_available_confirmed), ]
-acu.or
+acu_or <- acu[order(acu$last_available_confirmed), ]
+acu_or
 ```
 ]
 
@@ -762,9 +773,49 @@ acu.or
 
 .tiny[
 ```{r fig.align='center', out.width=400}
-barplot(acu.or[, 2], names.arg = acu.or[, 1], las = 2)
+barplot(acu_or[, 2], names.arg = acu_or[, 1], las = 2)
 ```
 ]
+
+---
+## municípios sem luz & função `merge()`
+
+```{r fig.align='center', out.width=400}
+# Lendo os dados
+muni_apagao <- read.csv("dados/brutos/municipios_apagao_11-2020.csv", 
+                        stringsAsFactors = FALSE)
+# Quantos municipios
+table(muni_apagao$apagao)
+# Juntando duas tabelas a partir de uma coluna comum
+acu_or_apagao <- merge(acu_or, muni_apagao, 
+                       by = "city", sort = FALSE)
+```
+
+---
+## municípios sem luz & função `merge()`
+
+```{r fig.align='center', out.width=400}
+head(acu_or)
+```
+
+---
+## municípios sem luz & função `merge()`
+
+```{r fig.align='center', out.width=400}
+head(acu_or_apagao)
+```
+
+---
+## municípios sem luz no gráfico de barras
+
+
+.tiny[
+```{r fig.align='center', out.width=400}
+barplot(acu_or_apagao[, 2], names.arg = acu_or_apagao[, 1], 
+        col = ifelse(acu_or_apagao$apagao == "sim", "grey", "orange"), las = 2)
+```
+]
+
 
 ---
 ## selecionando partes do dado
@@ -791,6 +842,7 @@ all.equal(estado2, estado)
 ```{r}
 # dados apenas de Macapa por meio do geocode do IBGE
 macapa <- amapa[amapa$city_ibge_code == "1600303", c(-15)]
+dim(macapa)
 ```
 
 
@@ -1001,6 +1053,67 @@ lines(new_confirmed ~ date, data = macapa)
 ```
 
 ---
+## mudando a cor
+
+```{r eval = FALSE}
+vermelho <- "#A70000" #ou rgb(167, 0, 0, maxColorValue = 255)
+vermelho_trans <- rgb(167, 0, 0, alpha = 150, maxColorValue = 255)
+
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários", 
+     col = vermelho)
+lines(new_confirmed ~ date, data = macapa, 
+      col = vermelho_trans)
+```
+
+---
+## mudando a cor
+
+```{r echo = FALSE, fig.align='center'}
+vermelho <- "#A70000" #ou rgb(167, 0, 0, maxColorValue = 255)
+vermelho_trans <- rgb(167, 0, 0, alpha = 150, maxColorValue = 255)
+
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários", 
+     col = vermelho) # muda cor
+lines(new_confirmed ~ date, data = macapa, 
+      col = vermelho_trans) # muda cor
+```
+
+---
+## mudando  tipo de ponto
+
+```{r eval = FALSE}
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários", 
+     col = vermelho_trans, # muda cor
+     pch = 19) # muda tipo de ponto
+lines(new_confirmed ~ date, data = macapa, 
+      col = vermelho_trans)
+```
+
+
+---
+## mudando  tipo de ponto
+
+```{r echo = FALSE, fig.align='center'}
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários", 
+     col = vermelho_trans, 
+     pch = 19) # muda tipo de ponto
+lines(new_confirmed ~ date, data = macapa, 
+      col = vermelho_trans)
+```
+
+---
 ## para exportar o gráfico
 
 ```{r eval = FALSE}
@@ -1010,8 +1123,11 @@ par(bty = "l", las = 1)
 # adicionando nome dos eixos
 plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
-     ylab = "Casos diários")
-lines(new_confirmed ~ date, data = macapa)
+     ylab = "Casos diários", 
+     col = vermelho_trans, # muda cor
+     pch = 19) # muda tipo de ponto
+lines(new_confirmed ~ date, data = macapa, 
+      col = vermelho_trans)
 dev.off()
 ```
 

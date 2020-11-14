@@ -4,7 +4,6 @@
     <title>como começar a usar R</title>
     <meta charset="utf-8" />
     <meta name="author" content="Sara Mortara &amp; Andrea Sánchez-Tapia   ¡liibre!" />
-    <script src="libs/header-attrs/header-attrs.js"></script>
     <script src="libs/clipboard/clipboard.min.js"></script>
     <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
     <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
@@ -27,7 +26,7 @@ class: center, middle, inverse, title-slide
 
 &lt;style type="text/css"&gt;
 .tiny .remark-code { /*Change made here*/
-  font-size: 60% !important;
+    font-size: 60% !important;
 }
 &lt;/style&gt;
 
@@ -270,11 +269,11 @@ class: inverse, middle, center
 --
 
 + em vez de usar __caminhos absolutos__ é melhor usar __caminhos relativos__
-  + evite `C://usuario/seu_nome/suas_pastas/seu_projeto` -&gt; caminho absoluto
-  + `.` "aqui" (o resultado de `getwd()`)
-  + `./subpastas` (ex. `/figs`)
-  + o nível acima `..`
-  
++ evite `C://usuario/seu_nome/suas_pastas/seu_projeto` -&gt; caminho absoluto
++ `.` "aqui" (o resultado de `getwd()`)
++ `./subpastas` (ex. `/figs`)
++ o nível acima `..`
+
 --
 
 + os __dados originais__ não devem ser modificados. qualquer modificação deve ser salva à parte, junto com os scripts que fizeram a modificação.
@@ -283,14 +282,14 @@ class: inverse, middle, center
 ## o projeto atual
 
 ```
- ./instituto_hub_demo/
- ├── README.md
- ├── codigo
- ├── dados
- │   ├── brutos
- │   └── processados
- ├── figs
- └── instituto_hub_demo.Rproj
+./instituto_hub_demo/
+├── README.md
+├── codigo
+├── dados
+│   ├── brutos
+│   └── processados
+├── figs
+└── instituto_hub_demo.Rproj
 ```
 
 &lt;center&gt;
@@ -340,8 +339,8 @@ class: inverse, middle, center
 
 --
 
-  + você pode perder controle de como foram criados os objetos
-  + pode guardar objetos com erros e isto pode interferir no seu trabalho
++ você pode perder controle de como foram criados os objetos
++ pode guardar objetos com erros e isto pode interferir no seu trabalho
 
 ---
 ## criação de objetos
@@ -623,6 +622,9 @@ library(coronabr)
 
 ```r
 caminho &lt;- "dados/brutos"
+if (!dir.exists(caminho)) {
+  dir.create(caminho)
+}
 get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
 ```
 
@@ -4313,10 +4315,10 @@ class: inverse, middle, center
 ## dados de COVID-19: responsabilidade &amp; contexto
 
 - dados deveriam ser abertos e acessíveis
-  
-  [Transparência COVID-19 OPEN KNOWLEDGE BRASIL](https://transparenciacovid19.ok.org.br)
-  
-  
+
+[Transparência COVID-19 OPEN KNOWLEDGE BRASIL](https://transparenciacovid19.ok.org.br)
+
+
 - nem toda análise que **pode** ser feita **deve** ser feita 
 
 
@@ -4438,6 +4440,34 @@ class(amapa$last_available_date)
 
 
 ```r
+# Conversão para data
+data1 &lt;- as.Date(amapa$date[1])
+data1
+```
+
+```
+## [1] "2020-03-20"
+```
+
+```r
+# Mudando o formato com a função format()
+format(data1, "%d/%m/%y")
+```
+
+```
+## [1] "20/03/20"
+```
+
+```r
+format(data1, "%d/%m/%Y")
+```
+
+```
+## [1] "20/03/2020"
+```
+
+```r
+# Mudando a data das colunas de data
 amapa$date &lt;- as.Date(amapa$date)
 amapa$last_available_date &lt;- as.Date(amapa$last_available_date)
 
@@ -4506,8 +4536,8 @@ barplot(acu[, 2], names.arg = acu[, 1])
 .tiny[
 
 ```r
-acu.or &lt;- acu[order(acu$last_available_confirmed), ]
-acu.or
+acu_or &lt;- acu[order(acu$last_available_confirmed), ]
+acu_or
 ```
 
 ```
@@ -4537,11 +4567,86 @@ acu.or
 .tiny[
 
 ```r
-barplot(acu.or[, 2], names.arg = acu.or[, 1], las = 2)
+barplot(acu_or[, 2], names.arg = acu_or[, 1], las = 2)
 ```
 
 &lt;img src="index_files/figure-html/unnamed-chunk-14-1.png" width="400" style="display: block; margin: auto;" /&gt;
 ]
+
+---
+## municípios sem luz &amp; função `merge()`
+
+
+```r
+# Lendo os dados
+muni_apagao &lt;- read.csv("dados/brutos/municipios_apagao_11-2020.csv", 
+                        stringsAsFactors = FALSE)
+# Quantos municipios
+table(muni_apagao$apagao)
+```
+
+```
+## 
+## não sim 
+##   2  14
+```
+
+```r
+# Juntando duas tabelas a partir de uma coluna comum
+acu_or_apagao &lt;- merge(acu_or, muni_apagao, 
+                       by = "city", sort = FALSE)
+```
+
+---
+## municípios sem luz &amp; função `merge()`
+
+
+```r
+head(acu_or)
+```
+
+```
+##              city last_available_confirmed
+## 5         Itaubal                      321
+## 12       Pracuúba                      351
+## 4  Ferreira Gomes                      590
+## 3          Cutias                      620
+## 14 Serra do Navio                      697
+## 1           Amapá                      787
+```
+
+---
+## municípios sem luz &amp; função `merge()`
+
+
+```r
+head(acu_or_apagao)
+```
+
+```
+##             city last_available_confirmed apagao
+## 1        Itaubal                      321    sim
+## 2       Pracuúba                      351    sim
+## 3 Ferreira Gomes                      590    sim
+## 4         Cutias                      620    sim
+## 5 Serra do Navio                      697    sim
+## 6          Amapá                      787    sim
+```
+
+---
+## municípios sem luz no gráfico de barras
+
+
+.tiny[
+
+```r
+barplot(acu_or_apagao[, 2], names.arg = acu_or_apagao[, 1], 
+        col = ifelse(acu_or_apagao$apagao == "sim", "grey", "orange"), las = 2)
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-18-1.png" width="400" style="display: block; margin: auto;" /&gt;
+]
+
 
 ---
 ## selecionando partes do dado
@@ -4579,6 +4684,11 @@ all.equal(estado2, estado)
 ```r
 # dados apenas de Macapa por meio do geocode do IBGE
 macapa &lt;- amapa[amapa$city_ibge_code == "1600303", c(-15)]
+dim(macapa)
+```
+
+```
+## [1] 239  17
 ```
 
 
@@ -4613,7 +4723,7 @@ lines(last_available_confirmed ~ date, data = macapa)
 ---
 ## casos novos no Macapá
 
-&lt;img src="index_files/figure-html/unnamed-chunk-20-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-24-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -4638,7 +4748,7 @@ lines(last_available_confirmed ~ date, data = estado)
 ---
 ## novos casos no estado do Amapá
 
-&lt;img src="index_files/figure-html/unnamed-chunk-23-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ## estado &amp; município
@@ -4660,7 +4770,7 @@ legend("topleft", c("estado AP", "município Macapá"),
 ---
 ## estado &amp; município
 
-&lt;img src="index_files/figure-html/unnamed-chunk-25-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ## gráfico de dispersão
@@ -4674,7 +4784,7 @@ plot(x = amapa$estimated_population,
 ---
 ## gráfico de dispersão
 
-&lt;img src="index_files/figure-html/unnamed-chunk-27-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-31-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ## boxplot
@@ -4688,12 +4798,12 @@ boxplot(last_available_death_rate ~ city,
 ---
 ## boxplot
 
-&lt;img src="index_files/figure-html/unnamed-chunk-29-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ## entendendo o boxplot
 
-&lt;img src="index_files/figure-html/unnamed-chunk-30-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-34-1.png" style="display: block; margin: auto;" /&gt;
 
 
 ---
@@ -4725,7 +4835,7 @@ lines(new_confirmed ~ date, data = macapa)
 ---
 ## um gráfico básico
 
-&lt;img src="index_files/figure-html/unnamed-chunk-33-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-37-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ## um gráfico melhor
@@ -4744,7 +4854,50 @@ lines(new_confirmed ~ date, data = macapa)
 ---
 ## um gráfico melhor
 
-&lt;img src="index_files/figure-html/unnamed-chunk-35-1.png" style="display: block; margin: auto;" /&gt;
+&lt;img src="index_files/figure-html/unnamed-chunk-39-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## mudando a cor
+
+
+```r
+vermelho &lt;- "#A70000" #ou rgb(167, 0, 0, maxColorValue = 255)
+vermelho_trans &lt;- rgb(167, 0, 0, alpha = 150, maxColorValue = 255)
+
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários", 
+     col = vermelho)
+lines(new_confirmed ~ date, data = macapa, 
+      col = vermelho_trans)
+```
+
+---
+## mudando a cor
+
+&lt;img src="index_files/figure-html/unnamed-chunk-41-1.png" style="display: block; margin: auto;" /&gt;
+
+---
+## mudando  tipo de ponto
+
+
+```r
+# adicionando nome dos eixos
+plot(new_confirmed ~ date, data = macapa,
+     xlab = "Data",
+     ylab = "Casos diários", 
+     col = vermelho_trans, # muda cor
+     pch = 19) # muda tipo de ponto
+lines(new_confirmed ~ date, data = macapa, 
+      col = vermelho_trans)
+```
+
+
+---
+## mudando  tipo de ponto
+
+&lt;img src="index_files/figure-html/unnamed-chunk-43-1.png" style="display: block; margin: auto;" /&gt;
 
 ---
 ## para exportar o gráfico
@@ -4757,8 +4910,11 @@ par(bty = "l", las = 1)
 # adicionando nome dos eixos
 plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
-     ylab = "Casos diários")
-lines(new_confirmed ~ date, data = macapa)
+     ylab = "Casos diários", 
+     col = vermelho_trans, # muda cor
+     pch = 19) # muda tipo de ponto
+lines(new_confirmed ~ date, data = macapa, 
+      col = vermelho_trans)
 dev.off()
 ```
 
@@ -4872,7 +5028,7 @@ dev.off()
 
 <i class="fab  fa-twitter "></i> [@SanchezTapiaA](https://twitter.com/SanchezTapiaA)  [@MortaraSara](https://twitter.com/MortaraSara) 
 
-<i class="fab  fa-github "></i> <i class="fab  fa-gitlab "></i> [¡liibre!](http://github.com/liibre)  
+<i class="fab  fa-github "></i> <i class="fab  fa-gitlab "></i> [¡liibre!](http://github.com/liibre)
     </textarea>
 <style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
 <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
