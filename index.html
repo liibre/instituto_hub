@@ -4888,7 +4888,8 @@ plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
      ylab = "Casos diários", 
      col = vermelho_trans, # muda cor
-     pch = 19) # muda tipo de ponto
+     pch = 19,# muda tipo de ponto
+     log = "y") # escala log no eixo y
 lines(new_confirmed ~ date, data = macapa, 
       col = vermelho_trans)
 ```
@@ -4905,14 +4906,15 @@ lines(new_confirmed ~ date, data = macapa,
 
 ```r
 png("figs/casos_diarios_Macapa.png", res = 300,
-    width = 1200, height = 1200)
+    width = 1500, height = 1200)
 par(bty = "l", las = 1)
 # adicionando nome dos eixos
 plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
      ylab = "Casos diários", 
      col = vermelho_trans, # muda cor
-     pch = 19) # muda tipo de ponto
+     pch = 19,# muda tipo de ponto
+     log = "y") # escala log no eixo y
 lines(new_confirmed ~ date, data = macapa, 
       col = vermelho_trans)
 dev.off()

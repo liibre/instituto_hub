@@ -1076,6 +1076,7 @@ vermelho <- "#A70000" #ou rgb(167, 0, 0, maxColorValue = 255)
 vermelho_trans <- rgb(167, 0, 0, alpha = 150, maxColorValue = 255)
 
 # adicionando nome dos eixos
+par(bty = "l", las = 1)
 plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
      ylab = "Casos diários", 
@@ -1093,7 +1094,8 @@ plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
      ylab = "Casos diários", 
      col = vermelho_trans, # muda cor
-     pch = 19) # muda tipo de ponto
+     pch = 19,# muda tipo de ponto
+     log = "y") # escala log no eixo y
 lines(new_confirmed ~ date, data = macapa, 
       col = vermelho_trans)
 ```
@@ -1102,13 +1104,15 @@ lines(new_confirmed ~ date, data = macapa,
 ---
 ## mudando  tipo de ponto
 
-```{r echo = FALSE, fig.align='center'}
+```{r echo = FALSE, fig.align='center', warning=FALSE}
 # adicionando nome dos eixos
+par(bty = "l", las = 1)
 plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
      ylab = "Casos diários", 
      col = vermelho_trans, 
-     pch = 19) # muda tipo de ponto
+     pch = 19,# muda tipo de ponto
+     log = "y") # escala log no eixo y
 lines(new_confirmed ~ date, data = macapa, 
       col = vermelho_trans)
 ```
@@ -1118,14 +1122,15 @@ lines(new_confirmed ~ date, data = macapa,
 
 ```{r eval = FALSE}
 png("figs/casos_diarios_Macapa.png", res = 300,
-    width = 1200, height = 1200)
+    width = 1500, height = 1200)
 par(bty = "l", las = 1)
 # adicionando nome dos eixos
 plot(new_confirmed ~ date, data = macapa,
      xlab = "Data",
      ylab = "Casos diários", 
      col = vermelho_trans, # muda cor
-     pch = 19) # muda tipo de ponto
+     pch = 19,# muda tipo de ponto
+     log = "y") # escala log no eixo y
 lines(new_confirmed ~ date, data = macapa, 
       col = vermelho_trans)
 dev.off()
