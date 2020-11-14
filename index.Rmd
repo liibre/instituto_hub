@@ -117,6 +117,8 @@ todos os códigos diponíveis em:
 
 `r icon::fa("r-project")`  https://rstudio.cloud/project/1878325
 
+[um bestiário de funções úteis](https://hackmd.io/@andreasancheztapia/bestiario_HUB)
+
 ---
 ## antes de começar
 
@@ -665,7 +667,7 @@ include_graphics("figs/data_feminism.png")
   [Transparência COVID-19 OPEN KNOWLEDGE BRASIL](https://transparenciacovid19.ok.org.br)
   
   
-- nem toda análise que **pode** ser feita, **deve** ser feita 
+- nem toda análise que **pode** ser feita **deve** ser feita 
 
 
 - cada dado diz respeito a uma pessoa
@@ -725,7 +727,7 @@ range(amapa$date)
 ```
 
 ---
-# usando a função `aggregate()` 
+## usando a função `aggregate()` 
 
 .tiny[
 ```{r}
@@ -759,7 +761,7 @@ acu.or
 ## novamente, o gráfico de barras
 
 .tiny[
-```{r fig.align='center'}
+```{r fig.align='center', out.width=400}
 barplot(acu.or[, 2], names.arg = acu.or[, 1], las = 2)
 ```
 ]
@@ -1096,7 +1098,7 @@ include_graphics("./figs/diarios_AP.png")
 
 
 ---
-## Fontes de ajuda 
+## fontes de ajuda 
 
 + Material de estudo em português [link](https://github.com/beatrizmilz/materiais_estudo_R)
 + [LearnR4Free](https://www.learnr4free.com/) em inglês e em espanhol
@@ -1111,7 +1113,7 @@ include_graphics("./figs/diarios_AP.png")
 + R Bloggers https://www.r-bloggers.com/
 
 ---
-## Comunidades
+## comunidades
 
 + Latin-R http://bit.ly/latinr-slack 
 + RLadies+ https://rladies.org/
