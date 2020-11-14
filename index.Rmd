@@ -13,18 +13,18 @@ output:
       ratio: '16:9'
 ---
 
-```{r setup, include=FALSE}
+```{r setup, include = FALSE, purl = FALSE}
 options(htmltools.dir.version = FALSE, cache = TRUE)
 
 ```
 
-```{css, echo = FALSE}
+```{css, echo = FALSE, purl = FALSE}
 .tiny .remark-code { /*Change made here*/
   font-size: 60% !important;
 }
 ```
 
-```{r xaringanthemer, include = FALSE}
+```{r xaringanthemer, include = FALSE, purl = FALSE}
 library(knitr)
 library(xaringanthemer)
 library(xaringanExtra)
@@ -50,7 +50,7 @@ xaringanthemer::style_mono_accent(
   )
 ```
 
-```{r xaringanExtra-clipboard, echo=FALSE}
+```{r xaringanExtra-clipboard, echo=FALSE, purl = FALSE}
 htmltools::tagList(
   xaringanExtra::use_clipboard(
     button_text = "<i class=\"fa fa-clipboard\"></i>",
@@ -62,7 +62,7 @@ htmltools::tagList(
 ```
 ## apresentação
 
-```{r logo-liibre, echo = FALSE}
+```{r logo-liibre, echo = FALSE, purl = FALSE}
 
 xaringanExtra::use_logo(image_url = "https://raw.githubusercontent.com/liibre/logo/master/figures/logo_liibre.png", width = 150)
 #knitr::include_graphics("https://raw.githubusercontent.com/liibre/logo/master/figures/logo_liibre.png?token=AA75IFQA34SCCZB72UL5IXK7UWDYA")
@@ -90,7 +90,7 @@ Bióloga (ESALQ/USP), MSc. Ecologia e Conservação da Biodiversidade (UESC) e D
 - Capítulo de RLadies+ Rio de Janeiro [**.purple[@RLadiesRio]**](https://twitter.com/RLadiesRio)
 
 
-```{r logo-rladiesplus, out.width=150, fig.align ='right', echo = FALSE}
+```{r logo-rladiesplus, out.width=150, fig.align ='right', echo = FALSE, purl = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/master/stickers/rainbow-inclusive.png")
 ```
 
@@ -120,11 +120,15 @@ todos os códigos diponíveis em:
 ---
 ## antes de começar
 
-+ procure a janela de chat do zoom, e faça perguntas por aí
++ procure a janela de chat do zoom, e não hesite em fazer perguntas
 
 --
 
 + tem um botão verde para contar se tudo está certo. Periodicamente vamos perguntar se todo mundo está acompanhando, por favor use este botão ou responda no chat
+
+--
+
++ pode abrir sua câmera :) procure manter seu microfone silenciado. 
 
 ---
 class: inverse, middle, center
@@ -151,11 +155,11 @@ class: inverse, middle, center
 
 --
 
-+ __interdisciplinar e modular__: muitos especialistas escrevem pacotes 
++ __interdisciplinar e modular__: muitos pacotes são escritos por especialistas 
 
 --
 
-+ uma filosofia de passar facilmente do uso à criação (programação)
++ uma filosofia de passar facilmente do uso à  programação
 
 ---
 ## por que R?
@@ -176,10 +180,10 @@ class: inverse, middle, center
 
 --
 
-+ suporte não oficial: uma comunidade ativa: listas de email, grupos de usuáries (useR), capítulos de .purple[R-Ladies+], comunidade de  [RStudio](community.rstudio.com/), 
++ __suporte não oficial__: uma comunidade ativa: listas de email, grupos de usuáries (useR), capítulos de .purple[R-Ladies+], comunidade de  [RStudio](community.rstudio.com/), 
 Stack Overflow, `r icon::fa("twitter")` `#rstats`
 
-```{r rladies+, out.width=150, echo = FALSE}
+```{r rladies+, out.width=150, echo = FALSE, purl = FALSE}
 knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/master/stickers/rainbow-inclusive.png")
 ```
 
@@ -216,19 +220,22 @@ background-position: 50% 90%
 
 ## rodando R em RStudio
 
-+ descompacte o arquivo .zip, entre na pasta e clique no arquivo __instituto_hub_demo.Rproj__
++ descompacte o arquivo .zip, entre na pasta e clique em __instituto_hub_demo.Rproj__
 
 `r icon::fa("laptop-code", size = 3)`
 
 ---
 ## RStudio 
 
-+ quatro paineis (script, console, várias abas: help, environment, plots, files...)
++ tela separada em três paineis. criar um __script__ abre o quarto painel. 
 
 + podemos executar código no console mas vamos usar o __script__ para guardar os passos. 
 
 + escrever no script e clicar `control + enter` para mandar o conteúdo para o console.
 
++ outras abas: help, environment, plots, files... 
+
+<!-- aqui NO! crear objetos, mostrar environment, mostrar ls() y mostrar el help y parar en files -->
 
 ---
 class: inverse, middle, center
@@ -245,7 +252,7 @@ class: inverse, middle, center
 
 --
 
-+ você pode mudar esta localização usando `setwd()` mas não é recomendado (erros!)
++ você pode mudar esta localização usando `setwd()` mas não é recomendado (erros!) [Jenny Bryan](https://www.tidyverse.org/blog/2017/12/workflow-vs-script/)
 
 --
 
@@ -263,7 +270,7 @@ class: inverse, middle, center
 --
 
 + em vez de usar __caminhos absolutos__ é melhor usar __caminhos relativos__
-  + evite `C:usuario/seu_nome/suas_pastas/seu_projeto` -> caminho absoluto
+  + evite `C://usuario/seu_nome/suas_pastas/seu_projeto` -> caminho absoluto
   + `.` "aqui" (o resultado de `getwd()`)
   + `./subpastas` (ex. `/figs`)
   + o nível acima `..`
@@ -276,17 +283,14 @@ class: inverse, middle, center
 ## o projeto atual
 
 ```
-  .
-  ├── README.md
-  ├── codigo
-  │   ├── 01-intro.R
-  │   ├── 02-fluxo_trabalho.R
-  │   ├── 03-manipulacao_dados.R
-  │   └── 04-graficos.R
-* ├── dados
-* ├── figuras
-* ├── resultados
-  └── instituto_hub_demo.Rproj
+ ./instituto_hub_demo/
+ ├── README.md
+ ├── codigo
+ ├── dados
+ │   ├── brutos
+ │   └── processados
+ ├── figs
+ └── instituto_hub_demo.Rproj
 ```
 
 <center>
@@ -310,7 +314,11 @@ class: inverse, middle, center
 `r icon::fa("laptop-code", size = 3)`
 
 ---
-## criação de objetos e o _workspace_
+## criação de objetos
+
++ executar no script ou no console -> não cria nada
+
+--
 
 + `<-` - para atribuição a objetos
 
@@ -336,10 +344,10 @@ class: inverse, middle, center
   + pode guardar objetos com erros e isto pode interferir no seu trabalho
 
 ---
-## criação de objetos e o _workspace_
+## criação de objetos
 
 
-+ confiar no __script__ para recriar todos os objetos
++ confiar no __script__ para recriar todos os objetos (__reprodutibilidade!__)
 
 --
 
@@ -347,11 +355,11 @@ class: inverse, middle, center
 
 --
 
-+ um script deveria ler ou criar objetos no início e salvar resultados no final
++ um script deve ler ou criar objetos no início e salvar resultados no final
 
 --
 
-+ é bom criar diferentes scripts sucessivos para manter a ordem
++ é bom criar diferentes __scripts sucessivos__ para manter a ordem
 
 ---
 background-image:url("figs/0a_setup.png")
@@ -404,7 +412,7 @@ class(posicao)
 
 + `c()` para criar - "concatenar"
 
-```{r}
+```{r str_length}
 str(estados) #estrutura
 length(estados)
 ```
@@ -417,7 +425,7 @@ length(estados)
 
 
 <small>
-```{r, results = "hide"}
+```{r subsetting, results = "hide"}
 estados <- c("Acre", "Alagoas", "Amapá", "Amazonas", "Tocantins")
 estados[1]
 estados[c(TRUE, FALSE, TRUE, FALSE)]
@@ -431,7 +439,7 @@ estados[c(1,3,5)] #tem que ser um vetor
 ---
 ## subsetting com cláusulas lógicas 
 
-```{r, results="hide"}
+```{r logical_clauses, results="hide"}
 casos <- c(150, 200, 400, 500, 500, 600)
 casos > 150
 casos[casos > 150]
@@ -471,44 +479,16 @@ casos[casos > 150]
 ```
 
 ---
-## comparando vetores
+##  criando vetores numéricos
 
-<small>
-```{r pertenecimento}
-estados <- c("acre", "alagoas", "amapá", "amazonas")
-norte <- c("acre", "amapá", "amazonas", "pará", "rondônia",
-           "roraima" , "tocantins")
-
-estados %in% norte
-estados[estados %in% norte]
-
-```
-
----
-## comparando vetores
-
-<small>
-```{r reciclando, results="hide", warning=F}
-
-estados == norte
-estados[estados == norte] #por que só tem acre?
-
-```
-</small>
-
-+ Os vetores são comparados __elemento por elemento__ e __reciclados__ quando um deles é mais curto. Possivelmente você está tentando usar `%in%` para checar se os elementos pertencem ao outro conjunto.
-
-
----
-##  outras funções importantes
-
-```{r, results="hide"}
+```{r outras, results="hide"}
 1:10
 seq(1, 10, 2)
 rep(1:4, 2)
 rep(1:4, each = 2)
 unique(casos)
 ```
+
 
 ---
 ## estruturas de dados em `R`
@@ -517,15 +497,11 @@ unique(casos)
 
 --
 
-+ __fatores__: vetores  que representam __variáveis categóricas__ e portanto têm níveis (__levels()__)
++ __fatores__: vetores  que representam __variáveis categóricas__ e portanto têm níveis (__levels()__) `factor(estados)`
 
 --
 
-+ __matrizes__: arranjos de duas dimensões de __dados do mesmo tipo__ (`dim()`, `nrow()`, `ncol()`). __Em R sempre linhas primeiro, colunas depois__
-
---
-
-+ __data frames__: arranjos bi-dimensionais de dados de diferentes tipos (i.e., uma coluna numérica, outra com nomes, outra com um fator etc.)
++ __matrizes__: arranjos de duas dimensões de __dados do mesmo tipo__ (`dim()`, `nrow()`, `ncol()`). 
 
 --
 
@@ -533,17 +509,32 @@ unique(casos)
 
 --
 
-__Hoje: data.frames__
++ __data frames__: arranjos bi-dimensionais de dados de diferentes tipos (i.e., uma coluna numérica, outra com nomes, outra com um fator etc.)
+
+---
+## data frames 
+
++ Duas dimensões (linhas e colunas): `dim()`, `ncol()`, `nrow()`
+
+--
+
++ Podem ser diferentes tipos de dado
+--
+
+
++ Uma versão recente(__*__) de `data.frame`: o `tibble`
+
+.foot-note[você vai ouvir falar do __tidyverse__]
 
 
 ---
 ## instalando pacotes
 
-```{r, eval = F}
-# Para instalar pacotes
+```{r pacotes, eval = F}
+# Para instalar pacotes desde CRAN
 install.packages("remotes")
 
-# Para instalar coronabr
+# Para instalar coronabr desde GitHub
 remotes::install_github("liibre/coronabr")
 
 # Para carregar pacotes
@@ -581,13 +572,11 @@ args(get_corona_br)
 ---
 ## download dos dados para Amapá
 
-+ Criar pasta à mão ou usar `dir.create()`
-
-```{r, echo = FALSE}
+```{r coronabr, echo = TRUE}
 library(coronabr)
 ```
 
-```{r, echo = FALSE}
+```{r download, echo = FALSE}
 # colocando aqui para nao fazer o download toda vez :P
 amapa <- read.csv("dados/brutos/01-amapa.csv", stringsAsFactors = FALSE)
 amapa$date <- as.Date(amapa$date)
@@ -595,33 +584,13 @@ amapa$last_available_date <- as.Date(amapa$last_available_date)
 ```
 
 
-```{r, eval = FALSE}
-caminho <- "dados/brutos"  #poderia ser "./dados/brutos"
-dir.create(path = caminho, recursive = TRUE)
-amapa <- get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
+```{r get_corona_br, eval = FALSE}
+caminho <- "dados/brutos"
+amapa <- get_corona_br(dir = "caminho", filename = "01-amapa", uf = "AP")
+
+amapa_df <- data.frame(amapa)
 ```
 
----
-## data frames 
-
-+ Duas dimensões (linhas e colunas): `dim()`, `ncol()`, `nrow()`
-
---
-
-+ Em R sempre primeiro linhas, depois colunas
-
---
-
-+ Podem ser diferentes tipos de dado
---
-
-+ Idealmente: __uma linha por observação__, __uma coluna por variável__
-
---
-
-+ Uma versão recente(__*__) de `data.frame`: o `tibble`
-
-.foot-note[você vai ouvir falar do __tidyverse__]
 ---
 ## inspecionar objetos `data.frame`
 
@@ -714,7 +683,7 @@ include_graphics("figs/data_feminism.png")
 
 - dados deveriam ser abertos e acessíveis
   
-  [Trânsparência COVID-19 OPEN KNOWLEDGE BRASIL](https://transparenciacovid19.ok.org.br)
+  [Transparência COVID-19 OPEN KNOWLEDGE BRASIL](https://transparenciacovid19.ok.org.br)
   
   
 - nem toda análise que **pode** ser feita, **deve** ser feita 
@@ -743,7 +712,6 @@ head(amapa[c(3, 4, 9:18)])
 
 ```{r}
 unique(amapa$city)
-
 
 ```
 
@@ -811,8 +779,7 @@ acu.or
 ## novamente, o gráfico de barras
 
 .tiny[
-```{r fig.align='center'}
-barplot(acu.or[, 2], names.arg = acu.or[, 1])
+barplot(acu.or[, 2], names.arg = acu.or[, 1], las = 2)
 ```
 ]
 
