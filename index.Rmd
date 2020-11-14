@@ -489,7 +489,6 @@ rep(1:4, each = 2)
 unique(casos)
 ```
 
-
 ---
 ## estruturas de dados em `R`
 
@@ -510,21 +509,6 @@ unique(casos)
 --
 
 + __data frames__: arranjos bi-dimensionais de dados de diferentes tipos (i.e., uma coluna numérica, outra com nomes, outra com um fator etc.)
-
----
-## data frames 
-
-+ Duas dimensões (linhas e colunas): `dim()`, `ncol()`, `nrow()`
-
---
-
-+ Podem ser diferentes tipos de dado
---
-
-
-+ Uma versão recente(__*__) de `data.frame`: o `tibble`
-
-.foot-note[você vai ouvir falar do __tidyverse__]
 
 
 ---
@@ -576,19 +560,14 @@ args(get_corona_br)
 library(coronabr)
 ```
 
-```{r download, echo = FALSE}
-# colocando aqui para nao fazer o download toda vez :P
-amapa <- read.csv("dados/brutos/01-amapa.csv", stringsAsFactors = FALSE)
-amapa$date <- as.Date(amapa$date)
-amapa$last_available_date <- as.Date(amapa$last_available_date)
-```
-
-
 ```{r get_corona_br, eval = FALSE}
 caminho <- "dados/brutos"
-amapa <- get_corona_br(dir = "caminho", filename = "01-amapa", uf = "AP")
+get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
+```
 
-amapa_df <- data.frame(amapa)
+```{r read_to_tranform_to_df}
+amapa <- read.csv("dados/brutos/01-amapa.csv", stringsAsFactors = FALSE)
+class(amapa)
 ```
 
 ---
@@ -707,6 +686,7 @@ amapa <- read.csv("dados/brutos/01-amapa.csv")
 head(amapa[c(3, 4, 9:18)])
 ```
 ]
+
 ---
 ## municipios do Amapá
 
@@ -779,6 +759,7 @@ acu.or
 ## novamente, o gráfico de barras
 
 .tiny[
+```{r fig.align='center'}
 barplot(acu.or[, 2], names.arg = acu.or[, 1], las = 2)
 ```
 ]
@@ -1018,7 +999,7 @@ lines(new_confirmed ~ date, data = macapa)
 ```
 
 ---
-# para exportar o grafico
+## para exportar o gráfico
 
 ```{r eval = FALSE}
 png("figs/casos_diarios_Macapa.png", res = 300,
@@ -1141,7 +1122,7 @@ include_graphics("./figs/diarios_AP.png")
 
 ---
 
-# Obrigada!
+## obrigada!
 
 <center>
 `r icon::fa("paper-plane")` [andreasancheztapia@gmail.com](mailto:andreasancheztapia@gmail.com) [saramortara@gmail.com](mailto:saramortara@gmail.com) 
