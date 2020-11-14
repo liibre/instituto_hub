@@ -169,7 +169,7 @@ class: inverse, middle, center
 
 --
 
-+ suporte não oficial: uma comunidade ativa: listas de email, grupos de usuáries (useR), capítulos de .purple[R-Ladies+], comunidade de  [RStudio](community.rstudio.com/) 
++ suporte não oficial: uma comunidade ativa: listas de email, grupos de usuáries (useR), capítulos de .purple[R-Ladies+], comunidade de  [RStudio](community.rstudio.com/), 
 Stack Overflow, `r icon::fa("twitter")` `#rstats`
 
 ```{r rladies+, out.width=150, echo = FALSE}
@@ -184,7 +184,11 @@ knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/m
 
 --
 
-+ repositório oficial de pacotes: __CRAN__ (The Comprehensive `R` Archive Network) or Bioconductor, GitHub, rOpenSci.org
++ repositório oficial de pacotes: __CRAN__ (The Comprehensive `R` Archive Network [https://cran.r-project.org/](https://cran.r-project.org/)) or Bioconductor, GitHub, rOpenSci.org
+
+--
+
++ pacotes fora da instalação de base precisam ser __instalados__ e __carregados__
 
 --
 
@@ -193,6 +197,10 @@ knitr::include_graphics("https://raw.githubusercontent.com/rladies/starter-kit/m
 --
 
 + as funções têm __opções__: "parâmetros", "argumentos"
+
+--
+
++ vamos manter a convenção `nome_da_funcao()` e `pacote::nome_da_funcao()` quando for preciso especificar o pacote ao qual a função pertence. 
 
 ---
 background-image:url("figs/rstudio.png")
@@ -591,12 +599,22 @@ amapa <- get_corona_br(dir = caminho, filename = "01-amapa", uf = "AP")
 
 + Duas dimensões (linhas e colunas): `dim()`, `ncol()`, `nrow()`
 
+--
+
 + Em R sempre primeiro linhas, logo colunas. 
 
+--
+
 + Podem ser diferentes tipos de dado
+--
 
 + Idealmente: __uma linha por observação__, __uma coluna por variável__
 
+--
+
++ Uma versão recente(__*__) de `data.frame`: o `tibble`
+
+.foot-note[você vai ouvir falar do __tidyverse__]
 ---
 ## inspecionar objetos `data.frame`
 
